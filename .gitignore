@@ -1,0 +1,8 @@
+# IDEs; because WebStorm...
+.idea
+
+# Node
+node_modules
+
+# Public
+public

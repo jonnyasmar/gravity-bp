@@ -1,0 +1,1 @@
+export { types as App } from '../reducers/App';
