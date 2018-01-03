@@ -9,11 +9,12 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
     - [x] SASS support
     - [x] Extract CSS
 - [x] Basic ExpressJS server implementation
+    - [x] GZip compression
+- [x] Development & production builds
 
 #### Please star this repo if you find it useful!
 
 ### Short-term Goals
-- [ ] Development & production builds
 - [ ] Style framework
 - [ ] React Router integration
 - [ ] Mocha/Chai/Enzyme test suite
