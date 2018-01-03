@@ -1,6 +1,7 @@
 import * as path from 'path';
 const twig = require('twig').__express;
 const express = require('express');
+const compression = require('compression');
 
 const pkg = require('../../package.json');
 const version = pkg.version;
@@ -10,6 +11,7 @@ let app = express(),
   port = 3000,
   views = path.resolve('./src/views');
 
+app.use(compression());
 app.use(express.static('public'));
 app.set('view engine', 'twig');
 app.engine('.twig', twig);

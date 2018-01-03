@@ -4,6 +4,6 @@ export interface IActions{
   readonly _App?: App.IActions
 }
 
-export const actions = (dispatch: any) => ({
+export const actions = (dispatch: any): IActions => ({
   _App: App.actions(dispatch)
 });
