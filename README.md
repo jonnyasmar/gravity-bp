@@ -11,6 +11,7 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 - [x] Basic ExpressJS server implementation
     - [x] GZip compression
 - [x] Development & production builds
+- [x] Basic Service Worker (based on `create-react-app`)
 
 #### Please star this repo if you find it useful!
 
