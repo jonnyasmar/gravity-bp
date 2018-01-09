@@ -1,7 +1,7 @@
 export class Messages{
   static lastMessageId: number;
 
-  public static messages: Array<string> = [
+  public static messages: ReadonlyArray<string> = [
     'Welcome!',
     'Welcome to Gravity Boilerplate!',
     'Thanks for stopping by!',
