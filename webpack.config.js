@@ -1,4 +1,5 @@
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -48,13 +49,21 @@ const prod = {
       dontCacheBustUrlsMatching: /\.\w{8}\./,
       filename: 'sw.js',
       minify: true,
-      navigateFallback: 'index.html',
+      navigateFallback: '/',
       stripPrefix: 'public/',
       swFilePath: 'public/sw.js',
-      staticFileGlobs: [
-        'public/index.html',
-        'public/**/!(*map*|*sw*)',
-      ],
+      staticFileGlobsIgnorePatterns: [/(map|sw)/],
+      dynamicUrlToDependencies: {
+        '/': [
+          ...glob.sync(`[name].css`),
+          ...glob.sync(`[name].js`),
+          ...glob.sync(`[name].json`),
+        ]
+      },
+      runtimeCaching: [{
+        urlPattern: /^http:\/\/localhost:3000/,
+        handler: 'networkFirst'
+      }],
     })
   ],
 };

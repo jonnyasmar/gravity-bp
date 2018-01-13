@@ -6,6 +6,8 @@ import App from './App'
 import '../styles/index.scss';
 const {Provider} = require('react-redux');
 
+document.write('<main id="root"></main>');
+
 render(
   <Provider store={store}>
     <App compiler="TypeScript" framework="React"/>
