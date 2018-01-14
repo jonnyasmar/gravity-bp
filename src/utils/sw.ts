@@ -5,16 +5,19 @@ export const register = (): void =>{
     const sw: ServiceWorkerContainer = navigator.serviceWorker;
     sw.register(swUrl).then(registration =>{
       registration.onupdatefound = (): any =>{
-        const installer: ServiceWorker = registration.installing;
-        installer.onstatechange = (): any =>{
-          if(installer.state === 'installed'){
-            if(sw.controller){
-              console.log('New content available.');
-            }else{
-              console.log('Content cached for offline use.');
+        const installer: ServiceWorker|null = registration.installing;
+
+        if(installer !== null){
+          installer.onstatechange = (): any =>{
+            if(installer.state === 'installed'){
+              if(sw.controller){
+                console.log('New content available.');
+              }else{
+                console.log('Content cached for offline use.');
+              }
             }
-          }
-        };
+          };
+        }
       };
     }).catch((error) =>{
       console.error('Failed to register service worker:', error);
