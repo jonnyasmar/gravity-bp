@@ -7,10 +7,6 @@ export class App extends React.Component<IProps>{
     this.props._App.newMessage();
   };
 
-  constructor(props: IProps){
-    super(props);
-  }
-
   render(){
     return <section id="App">
       <h1>{this.props.App.message}</h1>

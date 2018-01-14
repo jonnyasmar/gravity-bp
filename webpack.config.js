@@ -1,10 +1,15 @@
 const path = require('path');
+const glob = require('glob');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const IS_PROD = process.env.NODE_ENV === 'production';
+const pkg = require('./package.json');
+const version = pkg.version;
 
 const dev = {};
 
@@ -35,32 +40,60 @@ const prod = {
         drop_console: true,
         booleans: true,
       },
+    }),
+    new ManifestPlugin({
+      fileName: 'asset-manifest.json',
+    }),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'gravity-bp',
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'sw.js',
+      minify: true,
+      navigateFallback: '/',
+      stripPrefix: 'public/',
+      swFilePath: 'public/sw.js',
+      staticFileGlobsIgnorePatterns: [/(map|sw)/],
+      dynamicUrlToDependencies: {
+        '/': [
+          ...glob.sync(`[name].css`),
+          ...glob.sync(`[name].js`),
+          ...glob.sync(`[name].json`),
+        ]
+      },
+      runtimeCaching: [{
+        urlPattern: /^http:\/\/localhost:3000/,
+        handler: 'networkFirst'
+      }],
     })
-  ]
+  ],
 };
 
 const common = {
   cache: true,
   entry: {
-    index: "./src/components/index.tsx"
+    index: './src/components/index.tsx'
   },
   output: {
     filename: '[name].js',
     chunkFilename: '[chunkhash].js',
     path: path.resolve(__dirname, 'public'),
+    publicPath: '/'
   },
-  devtool: "source-map",
+  devtool: 'source-map',
   resolve: {
-    extensions: [".tsx", ".ts", ".js", ".scss", ".css"]
+    extensions: ['.tsx', '.ts', '.js', '.scss', '.css', '.twig']
   },
   plugins: [
+    new webpack.EnvironmentPlugin([
+      'NODE_ENV'
+    ]),
     new webpack.optimize.CommonsChunkPlugin({
       name: "common"
     }),
     new ExtractTextPlugin({
-      filename: "[name].css",
+      filename: '[name].css',
       allChunks: true,
-    }),
+    })
   ],
   module: {
     rules: [
@@ -70,7 +103,7 @@ const common = {
       },
       {
         test: /\.(scss|css)$/,
-        loader: ExtractTextPlugin.extract(["css-loader", "sass-loader"]),
+        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
       },
     ]
   },
