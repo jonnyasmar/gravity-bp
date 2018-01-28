@@ -1,8 +1,10 @@
 const swUrl: string = 'sw.js';
 
 export const register = (): void =>{
+
   if(process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator){
     const sw: ServiceWorkerContainer = navigator.serviceWorker;
+
     sw.register(swUrl).then(registration =>{
       registration.onupdatefound = (): any =>{
         const installer: ServiceWorker|null = registration.installing;
@@ -10,11 +12,8 @@ export const register = (): void =>{
         if(installer !== null){
           installer.onstatechange = (): any =>{
             if(installer.state === 'installed'){
-              if(sw.controller){
-                console.log('New content available.');
-              }else{
-                console.log('Content cached for offline use.');
-              }
+              if(sw.controller) console.log('New content available. Refresh the page.');
+              else console.log('Content cached for offline use.');
             }
           };
         }

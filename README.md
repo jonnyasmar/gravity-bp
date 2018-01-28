@@ -11,24 +11,24 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 - [x] Basic ExpressJS server implementation
     - [x] GZip compression
 - [x] Development & production builds
-- [x] Basic service worker (just to cache JS & CSS)
+- [x] Basic service worker (with offline capability & console.log on new)
+- [x] webpack-dev-server w/ hot reloading
 
 #### Please star this repo if you find it useful!
 
 ### Short-term Goals
-- [ ] Server-side rendering
-- [ ] Style framework
+- [ ] CSSinJS style framework (leaning towards Glamorous)
 - [ ] React Router integration
-- [ ] Fully-offline service worker support
+- [ ] AWS CloudFront deployment
+- [ ] NestJS back-end stub
 - [ ] Mocha/Chai/Enzyme test suite
-- [ ] Basic CMS integration
-- [ ] Microservice API stub
 - [ ] JSDoc generation
 - [ ] Dockerization
 
 ### Long-term Goals
 - [ ] GitLab CI/CD integration
-- [ ] Google Cloud integration
+- [ ] Basic CMS integration
 - [ ] Serverless API stub
+- [ ] Microservice API stub
 - [ ] React Native integration
 - [ ] Electron integration

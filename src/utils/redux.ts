@@ -1,5 +1,5 @@
-import { actions, IActions } from "../actions";
-import { IReducers, props } from "../reducers";
+import { actions, IActions } from '../actions';
+import { IReducers, props } from '../reducers';
 const {connect} = require('react-redux');
 
 export interface IProps extends IActions, IReducers{}

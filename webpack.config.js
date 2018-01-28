@@ -1,17 +1,27 @@
+const util = require('util')
+
+
 const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const IS_PROD = process.env.NODE_ENV === 'production';
 const pkg = require('./package.json');
 const version = pkg.version;
 
-const dev = {};
+const dev = {
+  devServer: {
+    contentBase: './public'
+  },
+};
 
 const prod = {
   plugins: [
@@ -46,22 +56,20 @@ const prod = {
     }),
     new SWPrecacheWebpackPlugin({
       cacheId: 'gravity-bp',
-      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      dontCacheBustUrlsMatching: /\.\w{20}\./,
       filename: 'sw.js',
       minify: true,
       navigateFallback: '/',
       stripPrefix: 'public/',
       swFilePath: 'public/sw.js',
-      staticFileGlobsIgnorePatterns: [/(map|sw)/],
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json/],
       dynamicUrlToDependencies: {
         '/': [
-          ...glob.sync(`[name].css`),
-          ...glob.sync(`[name].js`),
-          ...glob.sync(`[name].json`),
+          ...glob.sync(`[name].js`)
         ]
       },
       runtimeCaching: [{
-        urlPattern: /^http:\/\/localhost:3000/,
+        urlPattern: /.*/,
         handler: 'networkFirst'
       }],
     })
@@ -75,24 +83,25 @@ const common = {
   },
   output: {
     filename: '[name].js',
-    chunkFilename: '[chunkhash].js',
     path: path.resolve(__dirname, 'public'),
-    publicPath: '/'
+    publicPath: ''
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.scss', '.css', '.twig']
+    extensions: ['.tsx', '.ts', '.js', '.scss', '.css', '.twig'],
   },
   plugins: [
+    new CleanWebpackPlugin(['public'], {
+      watch: true
+    }),
     new webpack.EnvironmentPlugin([
       'NODE_ENV'
     ]),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "common"
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true,
+    new HtmlWebpackPlugin({
+      template: 'src/views/index.twig',
+      inject: 'body',
+      title: 'Gravity Boilerplate by Jonny Asmar'
+
     })
   ],
   module: {
@@ -102,8 +111,8 @@ const common = {
         loader: 'awesome-typescript-loader',
       },
       {
-        test: /\.(scss|css)$/,
-        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
+        test: /\.twig$/,
+        loader: 'twig-loader'
       },
     ]
   },

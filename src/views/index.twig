@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Gravity Boilerplate by Jonny Asmar</title>
-    <link href="/index.css?v={{ version }}" rel="stylesheet" type="text/css">
-</head>
+{% spaceless %}
 
-<body>
-<script src="/common.js?v={{ version }}"></script>
-<script src="/index.js?v={{ version }}"></script>
-</body>
+    <!DOCTYPE html>
 
-</html>
+    <html>
+
+    <head>
+        <title>{{ htmlWebpackPlugin.options.title }}</title>
+    </head>
+
+    <body/>
+
+    </html>
+
+{% endspaceless %}
