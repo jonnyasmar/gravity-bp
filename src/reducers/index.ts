@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as App from "./App";
+import * as App from './App';
 
 export interface IReducers{
   readonly App: App.IState

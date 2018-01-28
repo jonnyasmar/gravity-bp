@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connected, IProps } from '../utils/redux';
-import '../styles/App.scss';
+import style from '../styles/App';
 
 export class App extends React.Component<IProps>{
   newMessage = (): void =>{
@@ -8,7 +8,7 @@ export class App extends React.Component<IProps>{
   };
 
   render(){
-    return <section id="App">
+    return <section id='App' style={style}>
       <h1>{this.props.App.message}</h1>
       <button onClick={this.newMessage}>Click Me!</button>
     </section>;
