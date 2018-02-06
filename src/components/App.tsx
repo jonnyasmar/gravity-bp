@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connected, IProps } from '../utils/redux';
 import style from '../styles/App';
+import { RealisticTyper } from 'react-realistic-typer';
 
 export class App extends React.Component<IProps>{
   newMessage = (): void =>{
@@ -9,7 +10,7 @@ export class App extends React.Component<IProps>{
 
   render(){
     return <section id='App' style={style}>
-      <h1>{this.props.App.message}</h1>
+      <h1><RealisticTyper message={this.props.App.message || ''}/></h1>
       <button onClick={this.newMessage}>Click Me!</button>
     </section>;
   }

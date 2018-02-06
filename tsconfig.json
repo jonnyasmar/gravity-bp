@@ -8,8 +8,7 @@
     "module": "commonjs",
     "target": "es5",
     "jsx": "react",
-    "experimentalDecorators": true,
-    "allowJs": false
+    "experimentalDecorators": true
   },
   "include": [
     "./src/**/*"
