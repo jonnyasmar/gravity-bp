@@ -1,3 +1,5 @@
+import { store } from '../utils/store';
+
 import * as App from './App';
 
 export interface IActions{
@@ -5,5 +7,5 @@ export interface IActions{
 }
 
 export const actions = (dispatch: any): IActions => ({
-  _App: App.actions(dispatch)
+  _App: App.actions(dispatch, store)
 });

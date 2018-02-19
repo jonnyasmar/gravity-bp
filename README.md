@@ -13,6 +13,7 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 - [x] Development & production builds
 - [x] Basic service worker (with offline capability & console.log on new)
 - [x] webpack-dev-server w/ hot reloading
+- [x] Serverless API stub
 
 #### Please star this repo if you find it useful!
 
@@ -28,7 +29,7 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 ### Long-term Goals
 - [ ] GitLab CI/CD integration
 - [ ] Basic CMS integration
-- [ ] Serverless API stub
 - [ ] Microservice API stub
+- [ ] Complete Usage Documentation
 - [ ] React Native integration
 - [ ] Electron integration

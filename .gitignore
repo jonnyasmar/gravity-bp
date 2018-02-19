@@ -1,8 +1,13 @@
 # IDEs; because WebStorm...
 .idea
 
+# Serverless
+.build
+.serverless
+
 # Node
 node_modules
+jspm_packages
 
 # Public
 public

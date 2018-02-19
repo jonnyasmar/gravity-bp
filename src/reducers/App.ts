@@ -1,6 +1,5 @@
-import * as services from '../services';
-
 export interface IState{
+  readonly lastMessageId?: number
   readonly message?: string
 }
 
@@ -13,7 +12,8 @@ export const TYPES = {
 };
 
 export const _state: IState = {
-  message: services.Messages.getNewMessage()
+  lastMessageId: -1,
+  message: ''
 };
 
 export const reducers = (state: IState = _state, action: IAction): IState =>{
@@ -21,6 +21,7 @@ export const reducers = (state: IState = _state, action: IAction): IState =>{
     case TYPES.NEW_MESSAGE:
       return {
         ...state,
+        lastMessageId: action.lastMessageId,
         message: action.message
       };
 

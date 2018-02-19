@@ -6,10 +6,12 @@
   "scripts": {
     "build": "webpack",
     "_build": "NODE_ENV=production webpack",
-    "start": "webpack-dev-server --hot",
-    "_start": "NODE_ENV=production webpack-dev-server --compress",
+    "start": "./node_modules/.bin/sls offline start --port 8081 & webpack-dev-server --hot --host 0.0.0.0",
+    "_start": "NODE_ENV=production ./node_modules/.bin/sls offline start --port 8081 & webpack-dev-server --compress",
     "serve": "webpack --watch & ts-node ./src/utils/server.ts",
-    "_serve": "NODE_ENV=production webpack --watch & ts-node ./src/utils/server.ts"
+    "_serve": "NODE_ENV=production webpack --watch & ts-node ./src/utils/server.ts",
+    "deploy": "echo 'COMING SOON!'",
+    "_deploy": "NODE_ENV=production echo 'COMING SOON!'"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,14 @@
   "dependencies": {
     "@babel/core": "^7.0.0-beta.38",
     "awesome-typescript-loader": "^3.4.1",
+    "axios": "^0.17.1",
     "babel-loader": "^7.1.2",
     "chunk-manifest-webpack-plugin": "^1.1.2",
     "clean-webpack-plugin": "^0.1.18",
     "compression": "^1.7.1",
     "compression-webpack-plugin": "^1.1.3",
     "css-loader": "^0.28.9",
+    "dotenv-webpack": "^1.5.4",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
     "glamor": "^2.20.40",
@@ -52,11 +56,15 @@
     "webpack-manifest-plugin": "^1.3.2"
   },
   "devDependencies": {
+    "@types/aws-lambda": "0.0.32",
     "@types/node": "^9.4.0",
     "@types/react": "^16.0.35",
     "@types/react-dom": "^16.0.3",
     "@types/react-redux": "^5.0.14",
     "@types/webpack-env": "^1.13.3",
+    "serverless": "^1.26.0",
+    "serverless-offline": "^3.18.0",
+    "serverless-plugin-typescript": "^1.1.5",
     "webpack-dev-server": "^2.11.1"
   }
 }

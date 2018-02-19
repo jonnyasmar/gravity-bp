@@ -12,6 +12,7 @@ const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 const IS_PROD = process.env.NODE_ENV === 'production';
 const pkg = require('./package.json');
@@ -21,10 +22,18 @@ const dev = {
   devServer: {
     contentBase: './public'
   },
+  plugins: [
+    new Dotenv({
+      path: './local.env',
+    }),
+  ]
 };
 
 const prod = {
   plugins: [
+    new Dotenv({
+      path: './prod.env',
+    }),
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
         discardComments: {
@@ -101,7 +110,6 @@ const common = {
       template: 'src/views/index.twig',
       inject: 'body',
       title: 'Gravity Boilerplate by Jonny Asmar'
-
     })
   ],
   module: {

@@ -5,9 +5,16 @@ export interface IActions{
   readonly newMessage: () => void;
 }
 
-export const actions = (dispatch: any): IActions => ({
-  newMessage: () => dispatch({
-    type: TYPES.App.NEW_MESSAGE,
-    message: services.Messages.getNewMessage()
-  }),
+export const actions = (dispatch: any, store: any): IActions => ({
+  newMessage: async (): Promise<any> =>{
+    let message: services.Messages.IMessage;
+    do message = await services.request(services.url('messages'));
+    while(message.id === store.getState().App.lastMessageId);
+
+    return dispatch({
+      type: TYPES.App.NEW_MESSAGE,
+      lastMessageId: message.id,
+      message: message.text,
+    });
+  }
 });

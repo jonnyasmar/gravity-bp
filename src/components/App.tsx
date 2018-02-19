@@ -4,14 +4,14 @@ import style from '../styles/App';
 import { RealisticTyper } from 'react-realistic-typer';
 
 export class App extends React.Component<IProps>{
-  newMessage = (): void =>{
+  componentWillMount(){
     this.props._App.newMessage();
-  };
+  }
 
   render(){
     return <section id='App' style={style}>
       <h1><RealisticTyper message={this.props.App.message || ''}/></h1>
-      <button onClick={this.newMessage}>Click Me!</button>
+      <button onClick={this.props._App.newMessage}>Click Me!</button>
     </section>;
   }
 }
