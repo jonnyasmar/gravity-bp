@@ -19,15 +19,14 @@ export namespace Messages{
       'Because React/Redux...',
       'Because TypeScript...',
       'Because Webpack...',
-      'Because Express...'
+      'Because Express...',
+      'Because Serverless...',
     ];
 
     public static getNewMessage(): IMessage{
-      let messageId = Math.round(Math.random() * (this.messages.length - 1));
-      return {
-        id: messageId,
-        text: this.messages[messageId]
-      }
+      let id = Math.round(Math.random() * (this.messages.length - 1));
+      let text = this.messages[id];
+      return {id, text}
     };
   }
 }
