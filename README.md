@@ -14,12 +14,12 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 - [x] Basic service worker (with offline capability & console.log on new)
 - [x] webpack-dev-server w/ hot reloading
 - [x] Serverless API stub
+- [x] React Router integration
 
 #### Please star this repo if you find it useful!
 
 ### Short-term Goals
 - [ ] CSSinJS style framework (leaning towards Glamorous)
-- [ ] React Router integration
 - [ ] AWS CloudFront deployment
 - [ ] NestJS back-end stub
 - [ ] Mocha/Chai/Enzyme test suite

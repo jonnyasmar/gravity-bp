@@ -20,7 +20,8 @@ const version = pkg.version;
 
 const dev = {
   devServer: {
-    contentBase: './public'
+    contentBase: './public',
+    historyApiFallback: true
   },
   plugins: [
     new Dotenv({
@@ -88,7 +89,7 @@ const prod = {
 const common = {
   cache: true,
   entry: {
-    index: './src/components/index.tsx'
+    index: './src/index.tsx'
   },
   output: {
     filename: '[name].js',
@@ -106,6 +107,10 @@ const common = {
     new webpack.EnvironmentPlugin([
       'NODE_ENV'
     ]),
+    new ExtractTextPlugin({
+      filename: "[name].css",
+      allChunks: true,
+    }),
     new HtmlWebpackPlugin({
       template: 'src/views/index.twig',
       inject: 'body',
@@ -114,6 +119,10 @@ const common = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(scss|css)$/,
+        loader: ExtractTextPlugin.extract(["css-loader", "sass-loader"]),
+      },
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',

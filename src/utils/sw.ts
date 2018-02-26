@@ -1,7 +1,6 @@
 const swUrl: string = 'sw.js';
 
 export const register = (): void =>{
-
   if(process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator){
     const sw: ServiceWorkerContainer = navigator.serviceWorker;
 

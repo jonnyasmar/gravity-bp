@@ -41,11 +41,11 @@
     "react-dom": "^16.2.0",
     "react-realistic-typer": "^1.0.8",
     "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "sw-precache-webpack-plugin": "^0.11.4",
-    "ts-node": "^4.1.0",
     "twig": "^1.10.5",
     "twig-loader": "^0.3.1",
     "typescript": "^2.6.2",
@@ -61,10 +61,13 @@
     "@types/react": "^16.0.35",
     "@types/react-dom": "^16.0.3",
     "@types/react-redux": "^5.0.14",
+    "@types/react-router": "^4.0.22",
+    "@types/react-router-dom": "^4.2.4",
     "@types/webpack-env": "^1.13.3",
     "serverless": "^1.26.0",
     "serverless-offline": "^3.18.0",
     "serverless-plugin-typescript": "^1.1.5",
+    "ts-node": "^4.1.0",
     "webpack-dev-server": "^2.11.1"
   }
 }

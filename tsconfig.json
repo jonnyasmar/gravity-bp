@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "outDir": "./public/",
     "sourceMap": true,
     "noImplicitAny": true,
