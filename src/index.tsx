@@ -8,13 +8,13 @@ import './styles/index.scss';
 
 const {Provider} = require('react-redux');
 
-document.write('<main id="root"></main>');
+document.write('<div></div>');
 
 render(
   <Provider store={store}>
     <App compiler='TypeScript' framework='React'/>
   </Provider>,
-  document.getElementById('root')
+  document.getElementsByTagName('div')[0]
 );
 
 register();
