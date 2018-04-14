@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { actions, IActions } from '../actions';
-import { IReducers, props } from '../reducers';
+import { actions, IActions } from 'actions/index';
+import { IReducers, props } from 'reducers/index';
 import { withRouter } from 'react-router-dom';
 const { connect } = require('react-redux');
 

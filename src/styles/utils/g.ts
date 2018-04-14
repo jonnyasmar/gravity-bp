@@ -37,7 +37,6 @@ type glam = {
 
 const g: glam = {};
 Object.keys(glamorous).forEach((key: string) => {
-  console.dir((glamorous as any)[key]);
   g[key] = enhance((glamorous as any)[key]);
 });
 

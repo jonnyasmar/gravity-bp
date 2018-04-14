@@ -1,1 +1,1 @@
-export { TYPES as App } from '../reducers/App';
+export { TYPES as App } from 'reducers/App';

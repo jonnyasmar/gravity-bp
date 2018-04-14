@@ -1,3 +1,3 @@
-export * from '../utils/api';
+export * from 'utils/api';
 
-export * from './Messages';
+export * from 'services/Messages';

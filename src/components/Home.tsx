@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { connected, IProps } from '../utils/redux';
+import { connected, IProps } from 'utils/redux';
 import { RealisticTyper } from 'react-realistic-typer';
-import * as g from '../styles';
+import * as g from 'styles/index';
 
 class Main extends React.Component<IProps> {
   render() {

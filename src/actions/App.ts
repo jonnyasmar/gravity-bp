@@ -1,15 +1,14 @@
-import * as TYPES from '../utils/types';
-import * as services from '../services';
+import * as TYPES from 'utils/types';
+import * as services from 'services/index';
 
 export interface IActions {
-  readonly newMessage: () => void;
+  readonly newMessage: () => any;
 }
 
 export const actions = (dispatch: any, store: any): IActions => ({
   newMessage: async (): Promise<any> => {
     let message: services.Messages.IMessage;
-    do message = await services.request(services.url('messages'));
-    while (message.id === store.getState().App.lastMessageId);
+    message = await services.request(services.url(`messages/${store().App.lastMessageId}`));
 
     return dispatch({
       type: TYPES.App.NEW_MESSAGE,

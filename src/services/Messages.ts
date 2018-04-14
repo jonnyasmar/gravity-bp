@@ -23,8 +23,11 @@ export namespace Messages {
       'Because Serverless...',
     ];
 
-    public static getNewMessage(): IMessage {
-      let id = Math.round(Math.random() * (this.messages.length - 1));
+    public static getNewMessage(lastId: number): IMessage {
+      let id: number;
+      do id = Math.round(Math.random() * (this.messages.length - 1));
+      while (id === +lastId);
+      //console.dir(id);
       let text = this.messages[id];
       return { id, text };
     }
@@ -32,7 +35,8 @@ export namespace Messages {
 }
 
 export const handler: Handler = (event: any, context: Context, callback: Callback) => {
-  let message = Messages.main.getNewMessage();
+  let id: number = +(event.pathParameters || {}).id || -1;
+  let message = Messages.main.getNewMessage(id);
   const response: Messages.IResponse = {
     statusCode: 200,
     body: JSON.stringify(message),

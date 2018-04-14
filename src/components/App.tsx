@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { connected, IProps } from '../utils/redux';
-import * as routes from '../utils/routes';
+import { connected, IProps } from 'utils/redux';
+import * as routes from 'utils/routes';
 import * as components from './';
-import * as g from '../styles';
+import * as g from 'styles/index';
 
 export class App extends React.Component<IProps, any> {
-  componentWillMount() {
-    this.props._App.newMessage();
+  getMessage = async () => {
+    await this.props._App.newMessage();
+  };
+
+  constructor(props: IProps) {
+    super(props);
+    this.getMessage();
   }
 
   render() {

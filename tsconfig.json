@@ -9,7 +9,17 @@
     "target": "es5",
     "jsx": "react",
     "experimentalDecorators": true,
-    "lib": ["es2015", "dom", "esnext.asynciterable"]
+    "lib": ["es2015", "dom", "esnext.asynciterable"],
+    "baseUrl": ".",
+    "paths": {
+      "actions/*": ["src/actions/*"],
+      "components/*": ["src/components/*"],
+      "reducers/*": ["src/reducers/*"],
+      "services/*": ["src/services/*"],
+      "styles/*": ["src/styles/*"],
+      "utils/*": ["src/utils/*"],
+      "views/*": ["src/views/*"]
+    }
   },
   "include": ["./src/**/*"]
 }

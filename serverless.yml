@@ -67,11 +67,14 @@ package:
 functions:
   messages:
     handler: src/services/Messages.handler
-
     events:
       - http:
-          path: messages
+          path: messages/{id?}
           method: get
+          request:
+            parameters:
+              paths:
+                id: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
