@@ -1,3 +1,3 @@
 export const textCenter: any = {
-  textAlign: 'center'
+  textAlign: 'center',
 };

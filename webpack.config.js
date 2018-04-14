@@ -1,5 +1,4 @@
-const util = require('util')
-
+const util = require('util');
 
 const path = require('path');
 const glob = require('glob');
@@ -11,7 +10,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const IS_PROD = process.env.NODE_ENV === 'production';
@@ -21,13 +20,13 @@ const version = pkg.version;
 const dev = {
   devServer: {
     contentBase: './public',
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
     new Dotenv({
       path: './local.env',
     }),
-  ]
+  ],
 };
 
 const prod = {
@@ -38,9 +37,9 @@ const prod = {
     new OptimizeCssAssetsPlugin({
       cssProcessorOptions: {
         discardComments: {
-          removeAll: true
-        }
-      }
+          removeAll: true,
+        },
+      },
     }),
     new UglifyJSPlugin({
       parallel: true,
@@ -74,27 +73,27 @@ const prod = {
       swFilePath: 'public/sw.js',
       staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json/],
       dynamicUrlToDependencies: {
-        '/': [
-          ...glob.sync(`[name].js`)
-        ]
+        '/': [...glob.sync(`[name].js`)],
       },
-      runtimeCaching: [{
-        urlPattern: /.*/,
-        handler: 'networkFirst'
-      }],
-    })
+      runtimeCaching: [
+        {
+          urlPattern: /.*/,
+          handler: 'networkFirst',
+        },
+      ],
+    }),
   ],
 };
 
 const common = {
   cache: true,
   entry: {
-    index: './src/index.tsx'
+    index: './src/index.tsx',
   },
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'public'),
-    publicPath: ''
+    publicPath: '',
   },
   devtool: 'source-map',
   resolve: {
@@ -102,26 +101,24 @@ const common = {
   },
   plugins: [
     new CleanWebpackPlugin(['public'], {
-      watch: true
+      watch: true,
     }),
-    new webpack.EnvironmentPlugin([
-      'NODE_ENV'
-    ]),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
     new ExtractTextPlugin({
-      filename: "[name].css",
+      filename: '[name].css',
       allChunks: true,
     }),
     new HtmlWebpackPlugin({
       template: 'src/views/index.twig',
       inject: 'body',
-      title: 'Gravity Boilerplate by Jonny Asmar'
-    })
+      title: 'Gravity Boilerplate by Jonny Asmar',
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.(scss|css)$/,
-        loader: ExtractTextPlugin.extract(["css-loader", "sass-loader"]),
+        loader: ExtractTextPlugin.extract(['css-loader', 'sass-loader']),
       },
       {
         test: /\.tsx?$/,
@@ -129,15 +126,12 @@ const common = {
       },
       {
         test: /\.twig$/,
-        loader: 'twig-loader'
+        loader: 'twig-loader',
       },
-    ]
+    ],
   },
   watchOptions: {
-    ignored: [
-      /public/,
-      /node_modules/,
-    ]
+    ignored: [/public/, /node_modules/],
   },
 };
 

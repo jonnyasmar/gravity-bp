@@ -1,51 +1,44 @@
-import g from 'glamorous';
-import * as _ from './_';
+import * as _ from './utils';
 
-export const main = _.special(g.main, [
-  {
-    height: '100vh',
-    '> *': {
-      boxSizing: 'border-box'
-    }
+export const main = _.g.main({
+  height: '100vh',
+  '> *': {
+    boxSizing: 'border-box',
   },
-]);
+});
 
-export const header = _.special(g.header, [
-  {
-    padding: '1em',
-    color: _.white,
-    background: _.primary,
-    borderBottom: `1px solid ${_.darken(.5, _.primary)}`
-  },
-]);
+export const header = _.g.header({
+  padding: '1em',
+  color: _.colors.white,
+  background: _.colors.primary,
+  borderBottom: `1px solid ${_.polished.darken(0.5, _.colors.primary)}`,
+});
 
-export const footer = _.special(g.footer, [
-  {
-    padding: '1em',
-    background: _.secondary,
-    borderTop: `1px solid ${_.darken(.5, _.secondary)}`
-  },
-]);
+export const footer = _.g.footer({
+  padding: '1em',
+  background: _.colors.secondary,
+  borderTop: `1px solid ${_.polished.darken(0.5, _.colors.secondary)}`,
+});
 
-export const section = _.special(g.section, [
+export const section = _.g.section([
+  _.basic.textCenter,
   {
-    ..._.textCenter,
     padding: '150px 1em 150px 2em',
-    background: _.white,
+    background: _.colors.white,
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       width: '1em',
     },
     '&::-webkit-scrollbar-track': {
-      background: _.gray,
+      background: _.colors.gray,
     },
     '&::-webkit-scrollbar-thumb': {
-      background: _.secondary,
-      margin: '2px'
-    }
+      background: _.colors.secondary,
+      margin: '2px',
+    },
   },
-  (props: any) =>{
-    switch(props.id){
+  (props: any) => {
+    switch (props.id) {
       case 'Home':
         return {};
       default:
@@ -54,14 +47,12 @@ export const section = _.special(g.section, [
   },
 ]);
 
-export const div = _.special(g.div, []);
+export const div = _.g.div();
 
-export const h1 = _.special(g.h1, [
-  {
-    ..._.textCenter,
-    color: _.primary,
-    [_.screen('t')]: {
-      color: _.darken(.5, _.primary)
-    }
-  }
-]);
+export const h1 = _.g.h1({
+  ..._.basic.textCenter,
+  color: _.colors.primary,
+  [_.screen('t')]: {
+    color: _.polished.darken(0.5, _.colors.primary),
+  },
+});

@@ -5,12 +5,12 @@ import * as routes from '../utils/routes';
 import * as components from './';
 import * as g from '../styles';
 
-export class App extends React.Component<IProps, any>{
-  componentWillMount(){
+export class App extends React.Component<IProps, any> {
+  componentWillMount() {
     this.props._App.newMessage();
   }
 
-  render(){
+  render() {
     return (
       <Router>
         <g.main layout="flexible vertical">
@@ -20,14 +20,8 @@ export class App extends React.Component<IProps, any>{
 
           <g.section layout="stretch:1-1-100%">
             <Switch>
-              <Route
-                exact
-                path={routes.Home}
-                component={components.Home}
-              />
-              <Route
-                component={components.NotFound}
-              />
+              <Route exact path={routes.Home} component={components.Home} />
+              <Route component={components.NotFound} />
             </Switch>
           </g.section>
 

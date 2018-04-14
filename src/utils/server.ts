@@ -14,12 +14,12 @@ app.use(compression());
 app.use(express.static('public'));
 
 // Routes
-app.get('*', (req: any, res: any, next: any) =>{
+app.get('*', (req: any, res: any, next: any) => {
   // vars
   res.locals.version = version;
 });
 
-let server = app.listen(port, ip, () =>{
+let server = app.listen(port, ip, () => {
   let host = server.address().address;
   let port = server.address().port;
   console.log('Gravity Boilerplate ready at http://%s:%s', host, port);

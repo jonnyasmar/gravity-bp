@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
     "outDir": "./public/",
     "sourceMap": true,
     "noImplicitAny": true,
@@ -10,13 +9,7 @@
     "target": "es5",
     "jsx": "react",
     "experimentalDecorators": true,
-    "lib": [
-      "es2015",
-      "dom",
-      "esnext.asynciterable"
-    ]
+    "lib": ["es2015", "dom", "esnext.asynciterable"]
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["./src/**/*"]
 }
