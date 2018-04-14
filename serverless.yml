@@ -1,5 +1,9 @@
 service: service
 
+custom:
+  services: src/services
+  Messages: ${self:custom.services}/Messages
+
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
@@ -12,11 +16,11 @@ package:
   exclude:
     - node_modules/**/*
   include:
-    src/services/Messages.ts
+    ${self:custom.Messages}.ts
 
 functions:
   messages:
-    handler: src/services/Messages.handler
+    handler: ${self:custom.Messages}.handler
     events:
       - http:
           path: messages/{id?}
