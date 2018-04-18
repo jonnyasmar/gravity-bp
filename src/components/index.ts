@@ -1,3 +1,3 @@
-export * from './App';
-export * from './Home';
-export * from './NotFound';
+export * from 'components/App';
+export * from 'components/Home';
+export * from 'components/NotFound';

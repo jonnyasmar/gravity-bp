@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as App from './App';
+import * as App from 'reducers/App';
 
 export interface IReducers {
   readonly history?: any;

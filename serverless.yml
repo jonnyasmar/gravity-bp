@@ -1,31 +1,31 @@
 service: service
 
-custom:
-  services: src/services
-  Messages: ${self:custom.services}/Messages
-
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
+  - serverless-plugin-include-dependencies
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
+  timeout: 20
+  environment:
+    GRIP_URL: ${env:GRIP_URL}
+
+custom:
+  services: src/services
+  index: ${self:custom.services}/index
 
 package:
-  exclude:
-    - node_modules/**/*
+  individually: true
   include:
-    ${self:custom.Messages}.ts
+    ${self:custom.index}.ts
 
 functions:
-  messages:
-    handler: ${self:custom.Messages}.handler
+  api:
+    handler: ${self:custom.index}.handler
     events:
       - http:
-          path: messages/{id?}
-          method: get
-          request:
-            parameters:
-              paths:
-                id: true
+          cors: true
+          path: /{proxy+}
+          method: any

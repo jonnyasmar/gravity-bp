@@ -19,13 +19,15 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 * [x] React Router integration
 * [x] Prettier on Precommit
 * [x] Basic Glamorous Setup
+* [x] NestJS back-end stub
+* [x] Fanout SSE Integration
 
 #### Please star this repo if you find it useful!
 
 ### Short-term Goals
 
+* [ ] Basic Dynamo DB CRUD boilerplate
 * [ ] AWS CloudFront deployment
-* [ ] NestJS back-end stub
 * [ ] Mocha/Chai/Enzyme test suite
 * [ ] JSDoc generation
 * [ ] Dockerization

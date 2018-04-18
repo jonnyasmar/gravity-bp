@@ -1,7 +1,7 @@
 import glamorous from 'glamorous';
 import { HTMLGlamorousComponentFactory } from 'glamorous/typings/built-in-component-factories';
 import { CSSProperties, StyleArgument } from 'glamorous';
-import * as props from './_props';
+import * as props from 'styles/utils/_props';
 
 const enhancer: any = {
   ...props,

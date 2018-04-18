@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./public/",
     "sourceMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strict": true,
     "strictNullChecks": true,
     "module": "commonjs",

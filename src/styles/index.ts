@@ -1,4 +1,4 @@
-import * as _ from './utils';
+import * as _ from 'styles/utils/index';
 
 export const main = _.g.main({
   height: '100vh',
