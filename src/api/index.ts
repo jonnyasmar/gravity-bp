@@ -22,7 +22,10 @@ class AppModule implements NestModule {
 let served;
 const createServer = () => {
   return NestFactory.create(AppModule, express)
-    .then(app => app.init())
+    .then(app => {
+      app.setGlobalPrefix('api');
+      app.init();
+    })
     .then(() => serverless.createServer(express));
 };
 

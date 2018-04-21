@@ -11,7 +11,7 @@ jspm_packages
 
 # Dist
 public
-api
+/api
 
 # Env
 .env.local
