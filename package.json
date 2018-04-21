@@ -4,15 +4,15 @@
   "description": "Gravity Boilerplate: A TypeScript powered React/Redux boilerplate by Jonny Asmar.",
   "main": "index",
   "scripts": {
-    "build": "webpack --config webpack.config.ui.js",
-    "_build": "NODE_ENV=production webpack --config webpack.config.ui.js",
+    "build": "webpack --config webpack.config.public.js",
+    "_build": "NODE_ENV=production webpack --config webpack.config.public.js",
     "start":
-      "webpack --config webpack.config.api.js && nodemon --exec 'sls offline start --port 8081' & webpack-dev-server --config webpack.config.ui.js --hot --host 0.0.0.0 & webpack --watch --config webpack.config.api.js",
+      "webpack --config webpack.config.api.js && nodemon --exec 'sls offline start --port 8081' & webpack-dev-server --config webpack.config.public.js --hot --host 0.0.0.0 & webpack --watch --config webpack.config.api.js",
     "_start":
-      "NODE_ENV=production webpack --config webpack.config.api.js && sls offline start --port 8081 & webpack-dev-server --config webpack.config.ui.js --compress",
+      "NODE_ENV=production webpack --config webpack.config.api.js && sls offline start --port 8081 & webpack-dev-server --config webpack.config.public.js --compress",
     "serve":
-      "webpack --config webpack.config.ui.js --config webpack.config.ui.js --watch & ts-node ./src/utils/server.ts",
-    "_serve": "NODE_ENV=production webpack --config webpack.config.ui.js --watch & ts-node ./src/utils/server.ts",
+      "webpack --config webpack.config.public.js --config webpack.config.public.js --watch & ts-node ./src/utils/server.ts",
+    "_serve": "NODE_ENV=production webpack --config webpack.config.public.js --watch & ts-node ./src/utils/server.ts",
     "_deploy": "NODE_ENV=production echo 'COMING SOON!'",
     "precommit": "pretty-quick --staged",
     "deploy": "webpack --config webpack.config.api.js && sls deploy",
