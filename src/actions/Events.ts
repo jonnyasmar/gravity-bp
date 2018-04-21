@@ -1,4 +1,4 @@
-import * as TYPES from 'utils/types';
+import { TYPES } from 'reducers';
 import { Events, IEventSource } from 'services/Events';
 
 export interface IActions {

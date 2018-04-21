@@ -2,15 +2,17 @@ import * as AWS from 'aws-sdk';
 import * as uuid from 'node-uuid';
 import { Callback, Context, Handler } from 'aws-lambda';
 
-import { Req, Get, Controller, Param } from '@nestjs/common';
+import { Req, Get, Post, Controller, Param, Body } from '@nestjs/common';
 import { publish } from 'utils/publish';
 
 export namespace Events {
   @Controller('events/:channel')
   export class api {
-    @Get('send/:message')
-    async sendMessage(@Param() params) {
-      await publish(params.channel, params.message);
+    @Post('send')
+    async sendMessage(@Param() params, @Body() body) {
+      await publish(params.channel, {
+        message: body.message,
+      });
     }
 
     @Get('subscribe')
@@ -105,8 +107,6 @@ export namespace Messages {
 }
 
 export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
-  console.dir(event);
-  console.dir(context);
   let id: number = +(event.pathParameters || {}).id || -1;
   try {
     let message = await Messages.main.getNewMessage(id);

@@ -119,7 +119,7 @@ const config = {
       ],
     },
     watchOptions: {
-      ignored: [/api/, /public/, /node_modules/],
+      ignored: [/^api/, /^public/, /^node_modules/],
     },
   },
 };

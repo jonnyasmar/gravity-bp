@@ -50,7 +50,6 @@ export const section = _.g.section([
 export const div = _.g.div();
 
 export const h1 = _.g.h1({
-  ..._.basic.textCenter,
   color: _.colors.primary,
   [_.screen('t')]: {
     color: _.polished.darken(0.5, _.colors.primary),

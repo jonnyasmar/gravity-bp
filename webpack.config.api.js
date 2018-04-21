@@ -22,7 +22,7 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(['api'], {
-      watch: true,
+      //watch: true,
     }),
     new webpack.EnvironmentPlugin(['NODE_ENV']),
   ],
@@ -36,7 +36,7 @@ const config = {
   },
   externals: [nodeExternals()],
   watchOptions: {
-    ignored: [/api/, /public/, /node_modules/],
+    ignored: [/^api/, /^public/, /^node_modules/],
   },
 };
 

@@ -1,4 +1,4 @@
-import * as TYPES from 'utils/types';
+import { TYPES } from 'reducers';
 
 export interface IActions {
   readonly setMessage: (message: string) => any;

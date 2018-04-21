@@ -13,6 +13,11 @@ export const props = (state: IReducers): IReducers => ({
   Events: state.Events,
 });
 
+export const TYPES = {
+  App: App.TYPES,
+  Events: Events.TYPES,
+};
+
 export const combinedReducers = combineReducers({
   App: App.reducer,
   Events: Events.reducer,

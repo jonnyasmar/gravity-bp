@@ -12,8 +12,8 @@ export class App extends React.Component<IProps, any> {
     this.props._Events.subscribe('messages', {
       onmessage: e => {
         let data = JSON.parse(e.data);
-        console.dir(`Received ${data} on messages...`);
-        this.props._App.setMessage(data);
+        console.log(`Received ${data.message} on messages...`);
+        this.props._App.setMessage(data.message);
       },
     });
   }
