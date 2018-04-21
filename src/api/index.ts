@@ -5,17 +5,17 @@ import * as serverless from 'aws-serverless-express';
 import { NestFactory } from '@nestjs/core';
 const express = require('express')();
 
-import { Messages } from 'api/Messages';
-export * from 'api/Messages';
+import { Events } from 'api/Events';
+export * from 'api/Events';
 
 @Module({
   imports: [],
-  controllers: [Messages.main],
+  controllers: [Events.api],
   components: [],
 })
 class AppModule implements NestModule {
   configure(consumer: MiddlewaresConsumer) {
-    consumer.apply(CorsMiddleware).forRoutes(Messages.main);
+    consumer.apply(CorsMiddleware).forRoutes(Events.api);
   }
 }
 
