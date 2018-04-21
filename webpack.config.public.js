@@ -17,6 +17,8 @@ const env = require('./env');
 const config = {
   [env.envs.dev]: {
     devServer: {
+      host: '0.0.0.0',
+      port: '8080',
       contentBase: './public',
       historyApiFallback: true,
     },

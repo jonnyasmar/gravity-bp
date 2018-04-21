@@ -12,6 +12,9 @@ provider:
     GRIP_URL: ${env:GRIP_URL}
 
 custom:
+  serverless-offline:
+    port: 8081
+    host: 0.0.0.0
   api: api
   index: ${self:custom.api}/index
 
