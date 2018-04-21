@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connected, IProps } from 'utils/redux';
 import * as routes from 'utils/routes';
-import * as components from 'components/index';
-import * as g from 'styles/index';
+import * as components from 'components';
+import * as g from 'styles';
 
 export class App extends React.Component<IProps, any> {
   constructor(props: IProps) {
