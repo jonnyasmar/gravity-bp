@@ -33,10 +33,6 @@ export class App extends React.Component<IProps, any> {
       console.dir('disconnected');
       this.es.close();
     };
-
-    /*this.keepAlive = setTimeout(() => {
-      this.startStream();
-    }, 15000);*/
   };
 
   constructor(props: IProps) {

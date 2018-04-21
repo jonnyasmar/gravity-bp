@@ -5,8 +5,8 @@ import * as serverless from 'aws-serverless-express';
 import { NestFactory } from '@nestjs/core';
 const express = require('express')();
 
-import { Messages } from './Messages';
-export * from './Messages';
+import { Messages } from 'api/Messages';
+export * from 'api/Messages';
 
 @Module({
   imports: [],
@@ -19,22 +19,22 @@ class AppModule implements NestModule {
   }
 }
 
-let server;
+let served;
 const createServer = () => {
-  return new Promise((resolve, reject) => {
-    NestFactory.create(AppModule, express).then(app => {
-      app.init().then(() => {
-        resolve(serverless.createServer(express));
-      });
-    });
-  });
+  return NestFactory.create(AppModule, express)
+    .then(app => app.init())
+    .then(() => serverless.createServer(express));
 };
 
 export const handler: Handler = (event: any, context: Context) => {
-  if (server) return serverless.proxy(server, event, context);
-  else
-    createServer().then(serve => {
-      server = serve;
-      return serverless.proxy(server, event, context);
+  if (served) {
+    console.log('Loading existing NestJS server...');
+    return serverless.proxy(served, event, context);
+  } else {
+    console.log('Creating NestJS server...');
+    createServer().then(server => {
+      served = server;
+      return serverless.proxy(served, event, context);
     });
+  }
 };

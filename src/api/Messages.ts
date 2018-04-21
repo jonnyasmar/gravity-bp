@@ -3,7 +3,7 @@ import * as uuid from 'node-uuid';
 import { Callback, Context, Handler } from 'aws-lambda';
 
 import { Req, Get, Controller, Param } from '@nestjs/common';
-import { message } from 'aws-sdk/clients/sns';
+import { publish } from 'utils/publish';
 
 export namespace Messages {
   export interface IResponse {
@@ -21,25 +21,10 @@ export namespace Messages {
   export class main {
     @Get('send/:message')
     async sendMessage(@Param() params) {
-      let grip = require('grip');
-      let faas_grip = require('faas-grip');
-
-      let body = JSON.stringify({
+      await publish('messages', {
         id: Math.random().toString(),
         text: params.message,
       });
-
-      try {
-        let message = new grip.HttpStreamFormat('event: message\ndata: ' + body + '\n\n');
-        let publish = new Promise((resolve, reject) => {
-          faas_grip.publish('messages', message, () => {
-            resolve();
-          });
-        });
-        await publish;
-      } catch (err) {
-        console.dir(err);
-      }
     }
 
     @Get('subscribe')

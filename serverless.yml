@@ -1,7 +1,6 @@
 service: service
 
 plugins:
-  - serverless-plugin-typescript
   - serverless-offline
   - serverless-plugin-include-dependencies
 
@@ -13,13 +12,15 @@ provider:
     GRIP_URL: ${env:GRIP_URL}
 
 custom:
-  services: src/services
-  index: ${self:custom.services}/index
+  api: api
+  index: ${self:custom.api}/index
 
 package:
   individually: true
+  exclude:
+    - ".*/**"
   include:
-    ${self:custom.index}.ts
+    - ${self:custom.index}.js
 
 functions:
   api:

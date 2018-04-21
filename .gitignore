@@ -9,5 +9,11 @@
 node_modules
 jspm_packages
 
-# Public
+# Dist
 public
+api
+
+# Env
+.env.local
+.env.dev
+.env.prod

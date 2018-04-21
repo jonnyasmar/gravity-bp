@@ -1,6 +1,6 @@
 import * as TYPES from 'utils/types';
 import { request } from 'utils/request';
-import * as services from 'services/index';
+import * as api from 'api';
 
 export interface IActions {
   readonly newMessage: () => any;
@@ -9,7 +9,7 @@ export interface IActions {
 
 export const actions = (dispatch: any, store: any): IActions => ({
   newMessage: async (): Promise<any> => {
-    let message: services.Messages.IMessage;
+    let message: api.Messages.IMessage;
     message = await request(`messages/${store().App.lastMessageId}`);
 
     return dispatch({
