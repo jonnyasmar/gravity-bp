@@ -15,18 +15,18 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 * [x] Development & production builds
 * [x] Basic service worker (with offline capability & console.log on new)
 * [x] webpack-dev-server w/ hot reloading
-* [x] Serverless API stub
+* [x] Serverless/NestJS API stub
 * [x] React Router integration
 * [x] Prettier on Precommit
 * [x] Basic Glamorous Setup
-* [x] NestJS back-end stub
 * [x] Fanout SSE Integration
 
 #### Please star this repo if you find it useful!
 
 ### Short-term Goals
 
-* [ ] Basic Dynamo DB CRUD boilerplate
+* [ ] Basic DynamoDB CRUD boilerplate
+* [ ] Basic RDS CRUD boilerplate
 * [ ] AWS CloudFront deployment
 * [ ] Mocha/Chai/Enzyme test suite
 * [ ] JSDoc generation
@@ -34,9 +34,9 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 
 ### Long-term Goals
 
+* [ ] Submodule separation of UI & API
 * [ ] GitLab CI/CD integration
 * [ ] Basic CMS integration
-* [ ] Microservice API stub
 * [ ] Complete Usage Documentation
 * [ ] React Native integration
 * [ ] Electron integration
