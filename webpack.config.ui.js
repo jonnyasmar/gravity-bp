@@ -1,3 +1,5 @@
+const util = require('util');
+
 const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
@@ -121,5 +123,7 @@ const config = {
     },
   },
 };
+
+//console.log(util.inspect(merge(common, config.all, config[env.env]), {depth: null}));
 
 module.exports = merge(common, config.all, config[env.env]);

@@ -10,7 +10,6 @@ class Main extends React.Component<IProps> {
         <g.h1>
           <RealisticTyper message={this.props.App.message || ''} />
         </g.h1>
-        <button onClick={this.props._App.newMessage}>Click Me!</button>
       </>
     );
   }

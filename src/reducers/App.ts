@@ -1,5 +1,4 @@
 export interface IState {
-  readonly lastMessageId?: number;
   readonly message?: string;
 }
 
@@ -12,16 +11,14 @@ export const TYPES = {
 };
 
 export const _state: IState = {
-  lastMessageId: -1,
-  message: '',
+  message: 'Welcome to Gravity Boilerplate!',
 };
 
-export const reducers = (state: IState = _state, action: IAction): IState => {
+export const reducer = (state: IState = _state, action: IAction): IState => {
   switch (action.type) {
     case TYPES.NEW_MESSAGE:
       return {
         ...state,
-        lastMessageId: action.lastMessageId,
         message: action.message,
       };
 

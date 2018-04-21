@@ -6,39 +6,16 @@ import * as components from 'components/index';
 import * as g from 'styles/index';
 
 export class App extends React.Component<IProps, any> {
-  keepAlive;
-  es;
-
-  getMessage = async () => {
-    await this.props._App.newMessage();
-  };
-
-  startStream = () => {
-    this.keepAlive = null;
-    if (this.es) this.es.close();
-    this.es = new EventSource(process.env.FANOUT_URL || '');
-    this.es.onerror = err => {
-      console.error(err);
-    };
-    this.es.onmessage = e => {
-      let data = JSON.parse(e.data);
-      console.dir(data.text);
-      this.props._App.setMessage(data.text);
-    };
-    this.es.onopen = () => {
-      console.dir('connected');
-    };
-
-    window.onbeforeunload = () => {
-      console.dir('disconnected');
-      this.es.close();
-    };
-  };
-
   constructor(props: IProps) {
     super(props);
-    this.getMessage();
-    this.startStream();
+
+    this.props._Events.subscribe('messages', {
+      onmessage: e => {
+        let data = JSON.parse(e.data);
+        console.dir(`Received ${data.text} on messages...`);
+        this.props._App.setMessage(data.text);
+      },
+    });
   }
 
   render() {
