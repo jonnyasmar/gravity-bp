@@ -26,7 +26,7 @@ const Main = _.g.main(props => {
           flex: '0 0 0',
           transition: 'background .25s',
           '&:hover': {
-            background: _.polished.darken(0.125, _.colors.primary),
+            background: _.colors.primaryDark,
           },
           '&[disabled]': {
             background: _.colors.gray,
@@ -42,13 +42,13 @@ const Header = _.g.header({
   padding: '1em',
   color: _.colors.white,
   background: _.colors.primary,
-  borderBottom: `1px solid ${_.polished.darken(0.5, _.colors.primary)}`,
+  borderBottom: `1px solid ${_.colors.primaryDark}`,
 });
 
 const Footer = _.g.footer({
   padding: '1em',
   background: _.colors.secondary,
-  borderTop: `1px solid ${_.polished.darken(0.5, _.colors.secondary)}`,
+  borderTop: `1px solid ${_.colors.secondaryDark}`,
 });
 
 const Section = _.g.section([
@@ -94,7 +94,7 @@ const Div = _.g.div();
 const H1 = _.g.h1({
   color: _.colors.primary,
   [_.screen('t')]: {
-    color: _.polished.darken(0.5, _.colors.primary),
+    color: _.colors.primaryDark,
   },
 });
 

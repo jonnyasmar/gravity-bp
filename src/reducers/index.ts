@@ -13,8 +13,8 @@ export interface INamed {
 }
 export interface IStore<T = {}> {
   readonly history?: any;
-  readonly Store: IReducers;
   readonly Selectors: T;
+  readonly Store: IReducers;
 }
 
 export type Dispatch<T> = (action: T & INamed) => any;

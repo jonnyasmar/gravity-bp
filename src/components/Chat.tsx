@@ -31,13 +31,13 @@ class Main extends React.Component<selectors.Chat.Props> {
   };
 
   render() {
-    const { Selectors } = this.props;
+    const { getMessages } = this.props.Selectors;
     const { Section, Chat, Form, Div } = g;
 
     return (
       <>
         <Section>
-          <Chat layout="stretch:1-1-100%">{Selectors.getMessages}</Chat>
+          <Chat layout="stretch:1-1-100%">{getMessages}</Chat>
         </Section>
 
         <Form onSubmit={this.submit}>
