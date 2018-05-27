@@ -1,45 +1,59 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { connected, IProps } from 'utils/redux';
-import * as routes from 'utils/routes';
-import * as components from 'components';
-import * as g from 'styles';
+import { connected, IProps } from 'reducers';
+import { components } from 'components';
+import { g } from 'styles';
 
-export class App extends React.Component<IProps, any> {
+class Main extends React.Component<IProps, any> {
   constructor(props: IProps) {
     super(props);
 
-    this.props._Events.subscribe('messages', {
-      onmessage: e => {
+    const { Actions } = props;
+
+    Actions.Events.subscribe('messages', {
+      onmessage: async e => {
         let data = JSON.parse(e.data);
-        console.log(`Received ${data.message} on messages...`);
-        this.props._App.setMessage(data.message);
+        console.log(`Received ${data.text} on messages...`);
+        await Actions.Chat.newMessage(data);
       },
+    });
+
+    this.state = {
+      window: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
+    };
+
+    window.addEventListener('resize', () => {
+      this.setState({
+        window: {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        },
+      });
     });
   }
 
   render() {
+    const { Router } = components;
+    const { Main, Section, Header, Div } = g;
+
     return (
-      <Router>
-        <g.main layout="flexible vertical">
-          <g.header layout="flexible">
-            <g.div text="align">Header</g.div>
-          </g.header>
+      <Main layout="flexible vertical" window={this.state.window}>
+        <Header layout="flexible stretch:0-0-auto">
+          <Div text="align">Gravity Boilerplate</Div>
+        </Header>
 
-          <g.section layout="stretch:1-1-100%">
-            <Switch>
-              <Route exact path={routes.Home} component={components.Home} />
-              <Route component={components.NotFound} />
-            </Switch>
-          </g.section>
+        <Section layout="flexible vertical">
+          <Router />
+        </Section>
 
-          <g.footer layout="flexible">
+        {/*<g.footer layout="flexible">
             <g.div text="align">Footer</g.div>
-          </g.footer>
-        </g.main>
-      </Router>
+          </g.footer>*/}
+      </Main>
     );
   }
 }
 
-export default connected(App, false);
+export const App = connected(Main);

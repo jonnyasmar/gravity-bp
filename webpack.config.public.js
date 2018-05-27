@@ -17,14 +17,25 @@ const env = require('./env');
 const config = {
   [env.envs.dev]: {
     devServer: {
+      hot: true,
       host: '0.0.0.0',
       port: '8080',
       contentBase: './public',
       historyApiFallback: true,
     },
+    plugins: [new webpack.HotModuleReplacementPlugin({})],
   },
   [env.envs.prod]: {
+    devServer: {
+      hot: true,
+      compress: true,
+      host: '0.0.0.0',
+      port: '8080',
+      contentBase: './public',
+      historyApiFallback: true,
+    },
     plugins: [
+      new webpack.HotModuleReplacementPlugin({}),
       new OptimizeCssAssetsPlugin({
         cssProcessorOptions: {
           discardComments: {
@@ -102,6 +113,7 @@ const config = {
         template: 'src/views/index.twig',
         inject: 'body',
         title: 'Gravity Boilerplate by Jonny Asmar',
+        api: env.vars.API,
       }),
     ],
     module: {
@@ -119,9 +131,6 @@ const config = {
           loader: 'twig-loader',
         },
       ],
-    },
-    watchOptions: {
-      ignored: [/^api/, /^public/, /^node_modules/],
     },
   },
 };

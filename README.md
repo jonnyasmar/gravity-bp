@@ -34,6 +34,7 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 
 ### Long-term Goals
 
+* [ ] Comprehensive style framework
 * [ ] Submodule separation of UI & API
 * [ ] GitLab CI/CD integration
 * [ ] Basic CMS integration

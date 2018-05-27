@@ -17,7 +17,7 @@ const enhancer: any = {
         let props = enhancer[key][val[0]];
         if (val[1] && typeof props === 'function') props = props(val[1]);
         else if (typeof props === 'function') props = props();
-        style = { ...style, ...props };
+        style = { ...props, ...style };
       });
     });
 
@@ -31,6 +31,12 @@ const enhance = (glam: HTMLGlamorousComponentFactory<HTMLElement>) => {
   };
 };
 
+export const compose = (glam: any) => {
+  return (styles: StyleArgument<CSSProperties, {}> | StyleArgument<CSSProperties, {}>[]) => {
+    return glamorous(glam)<props.GravityProps>([styles, enhancer.generator]);
+  };
+};
+
 type glam = {
   [key: string]: Function;
 };
@@ -40,4 +46,4 @@ Object.keys(glamorous).forEach((key: string) => {
   g[key] = enhance((glamorous as any)[key]);
 });
 
-export { g };
+export { g, glamorous };

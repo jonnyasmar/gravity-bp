@@ -1,3 +1,6 @@
-export * from 'components/App';
-export * from 'components/Home';
-export * from 'components/NotFound';
+import { App } from 'components/App';
+import { Router } from 'components/Router';
+import { Chat } from 'components/Chat';
+import { NotFound } from 'components/NotFound';
+
+export const components = { Router, App, Chat, NotFound };

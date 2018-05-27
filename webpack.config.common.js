@@ -1,39 +1,31 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
-const merge = require('webpack-merge');
 const env = require('./env');
 
 const config = {
-  [env.envs.dev]: {
-    plugins: [
-      new Dotenv({
-        path: './.env.local',
-      }),
-    ],
-  },
-  [env.envs.prod]: {
-    plugins: [
-      new Dotenv({
-        path: './.env.prod',
-      }),
-    ],
-  },
-  all: {
-    resolve: {
-      alias: {
-        api: path.resolve(__dirname, 'src/api'),
-        actions: path.resolve(__dirname, 'src/actions'),
-        components: path.resolve(__dirname, 'src/components'),
-        reducers: path.resolve(__dirname, 'src/reducers'),
-        root: path.resolve(__dirname),
-        services: path.resolve(__dirname, 'src/services'),
-        src: path.resolve(__dirname, 'src'),
-        styles: path.resolve(__dirname, 'src/styles'),
-        utils: path.resolve(__dirname, 'src/utils'),
-        views: path.resolve(__dirname, 'src/views'),
-      },
+  plugins: [
+    new Dotenv({
+      path: `./.env.${env.env}`,
+    }),
+  ],
+  resolve: {
+    alias: {
+      api: path.resolve(__dirname, 'src/api'),
+      actions: path.resolve(__dirname, 'src/actions'),
+      components: path.resolve(__dirname, 'src/components'),
+      reducers: path.resolve(__dirname, 'src/reducers'),
+      root: path.resolve(__dirname),
+      selectors: path.resolve(__dirname, 'src/selectors'),
+      services: path.resolve(__dirname, 'src/services'),
+      src: path.resolve(__dirname, 'src'),
+      styles: path.resolve(__dirname, 'src/styles'),
+      utils: path.resolve(__dirname, 'src/utils'),
+      views: path.resolve(__dirname, 'src/views'),
     },
+  },
+  watchOptions: {
+    ignored: [/^api/, /^public/, /^node_modules/],
   },
 };
 
-module.exports = merge(config.all, config[env.env]);
+module.exports = config;

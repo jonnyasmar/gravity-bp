@@ -1,6 +1,27 @@
-@import '~normalize.css/normalize.css';
+@import '~normalize.css/normalize';
+@import './mixins/form-reset';
 
 html,
 body {
-  font-family: sans-serif;
+  height: 100%;
+}
+
+input {
+  @extend %form-reset-input;
+}
+
+label {
+  @extend %form-reset-label;
+}
+
+select {
+  @extend %form-reset-select;
+}
+
+button {
+  @extend %form-reset-button;
+}
+
+textarea {
+  @extend %form-reset-textarea;
 }

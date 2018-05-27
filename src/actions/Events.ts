@@ -1,39 +1,40 @@
-import { TYPES } from 'reducers';
+import { types } from 'reducers';
+import { Store, Dispatch, states, actions } from 'reducers';
 import { Events, IEventSource } from 'services/Events';
 
 export interface IActions {
-  readonly subscribe: (channel: string, options: IEventSource) => any;
-  readonly unsubscribe: (channel: string) => any;
-  readonly unsubscribeAll: () => any;
+  readonly subscribe: (channel: string, options: IEventSource) => actions.Events;
+  readonly unsubscribe: (channel: string) => actions.Events;
+  readonly unsubscribeAll: () => actions.Events;
 }
 
-export const actions = (dispatch: any, store: any): IActions => ({
-  subscribe: (channel: string, options: IEventSource): void => {
+export const action = (dispatch: Dispatch<actions.Events>, store: Store<states.Events>): IActions => ({
+  subscribe: (channel: string, options: IEventSource): actions.Events => {
     try {
       Events.subscribe(channel, options);
       return dispatch({
-        type: TYPES.Events.SUBSCRIBE,
+        type: types.Events.SUBSCRIBE,
         channel,
       });
     } catch (err) {
       throw err;
     }
   },
-  unsubscribe: (channel: string): void => {
+  unsubscribe: (channel: string): actions.Events => {
     try {
       Events.unsubscribe(channel);
       return dispatch({
-        type: TYPES.Events.UNSUBSCRIBE,
+        type: types.Events.UNSUBSCRIBE,
         channel,
       });
     } catch (err) {
       throw err;
     }
   },
-  unsubscribeAll: (): void => {
+  unsubscribeAll: (): actions.Events => {
     try {
       Events.unsubscribeAll();
-      return dispatch({ type: TYPES.Events.UNSUBSCRIBE_ALL });
+      return dispatch({ type: types.Events.UNSUBSCRIBE_ALL });
     } catch (err) {
       throw err;
     }

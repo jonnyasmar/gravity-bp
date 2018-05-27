@@ -1,1 +1,5 @@
-export const Home = '/';
+let routes: any = {};
+
+routes.Home = '/';
+
+export { routes };

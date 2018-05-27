@@ -1,22 +1,19 @@
 import * as React from 'react';
-import { connected, IProps } from 'utils/redux';
+import { connected, IProps } from 'reducers';
 import { RealisticTyper } from 'react-realistic-typer';
-import * as g from 'styles';
+import { g } from 'styles';
 
 class Main extends React.Component<IProps> {
   render() {
+    const { history } = this.props;
+    const { H1 } = g;
+
     return (
       <>
-        <g.h1>
+        <H1>
           <RealisticTyper message="Sorry, nothing to see here..." />
-        </g.h1>
-        <button
-          onClick={() => {
-            this.props.history.push('/');
-          }}
-        >
-          Go Back
-        </button>
+        </H1>
+        <button onClick={() => history.push('/')}>Go Back</button>
       </>
     );
   }

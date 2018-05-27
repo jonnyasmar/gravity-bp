@@ -1,19 +1,19 @@
-export interface IState {
+interface IState {
   readonly subscriptions?: Array<string>;
 }
 
-export interface IAction {
+interface IAction {
   readonly type: string;
   readonly channel?: string;
 }
 
-export const TYPES = {
+const types = {
   SUBSCRIBE: 'SUBSCRIBE',
   UNSUBSCRIBE: 'UNSUBSCRIBE',
   UNSUBSCRIBE_ALL: 'UNSUBSCRIBE_ALL',
 };
 
-export const _state: IState = {
+const initialState: IState = {
   subscriptions: [],
 };
 
@@ -29,25 +29,30 @@ const removeSubscription = (subscriptions: Array<string> | undefined, channel: s
   });
 };
 
-export const reducer = (state: IState = _state, action: IAction): IState => {
-  switch (action.type) {
-    case TYPES.SUBSCRIBE:
+const reducer = (state: IState = initialState, action: IAction): IState => {
+  const actions = {
+    [types.SUBSCRIBE]: () => {
       return {
         ...state,
         subscriptions: addSubscription(state.subscriptions, action.channel),
       };
-    case TYPES.UNSUBSCRIBE:
+    },
+    [types.UNSUBSCRIBE]: () => {
       return {
         ...state,
         subscriptions: removeSubscription(state.subscriptions, action.channel),
       };
-    case TYPES.UNSUBSCRIBE_ALL:
+    },
+    [types.UNSUBSCRIBE_ALL]: () => {
       return {
         ...state,
         subscriptions: [],
       };
+    },
+  };
 
-    default:
-      return state;
-  }
+  return actions.hasOwnProperty(action.type) ? actions[action.type]() : state;
 };
+
+// Required Exports
+export { IState, IAction, types, initialState, reducer };

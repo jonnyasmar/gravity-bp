@@ -21,53 +21,41 @@ export class Events {
   });
 
   static subscribe = (channel: string, options: IEventSource): ISubscribeResponse => {
-    try {
-      if (Events.storage[channel]) throw new Error(`Already subscribed to ${channel}...`);
+    if (Events.storage[channel]) throw new Error(`Already subscribed to ${channel}...`);
 
-      let subscribeUrl = (process.env.SUBSCRIBE_URL || '').replace(':channel', channel);
+    let subscribeUrl = (process.env.SUBSCRIBE_URL || '').replace(':channel', channel);
 
-      let eventSource: EventSource = new EventSource(subscribeUrl);
-      eventSource.onerror = options.onerror || (evt => console.error(evt));
-      eventSource.onmessage = options.onmessage || (evt => console.dir(evt));
-      eventSource.onopen =
-        options.onopen ||
-        (() => {
-          console.log(`Subscribed to ${channel}...`);
-        });
+    let eventSource: EventSource = new EventSource(subscribeUrl);
+    eventSource.onerror = options.onerror || (evt => console.error(evt));
+    eventSource.onmessage = options.onmessage || (evt => console.dir(evt));
+    eventSource.onopen =
+      options.onopen ||
+      (() => {
+        console.log(`Subscribed to ${channel}...`);
+      });
 
-      Events.storage[channel] = eventSource;
+    Events.storage[channel] = eventSource;
 
-      return {
-        event: Events.storage[channel],
-        channel,
-      };
-    } catch (err) {
-      throw err;
-    }
+    return {
+      event: Events.storage[channel],
+      channel,
+    };
   };
 
   static unsubscribe = (channel: string): string => {
-    try {
-      if (!Events.storage[channel]) throw new Error(`Not subscribed to ${channel}...`);
-      Events.storage[channel].close();
-      delete Events.storage[channel];
-      console.log(`Unsubscribed from ${channel}...`);
+    if (!Events.storage[channel]) throw new Error(`Not subscribed to ${channel}...`);
+    Events.storage[channel].close();
+    delete Events.storage[channel];
+    console.log(`Unsubscribed from ${channel}...`);
 
-      return channel;
-    } catch (err) {
-      throw err;
-    }
+    return channel;
   };
 
   static unsubscribeAll = (): void => {
     Object.keys(Events.storage).forEach(channel => {
-      try {
-        Events.storage[channel].close();
-        delete Events.storage[channel];
-        console.log(`Unsubscribed from ${channel}...`);
-      } catch (err) {
-        throw err;
-      }
+      Events.storage[channel].close();
+      delete Events.storage[channel];
+      console.log(`Unsubscribed from ${channel}...`);
     });
   };
 }

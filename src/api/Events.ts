@@ -5,29 +5,28 @@ import { Callback, Context, Handler } from 'aws-lambda';
 import { Req, Get, Post, Controller, Param, Body } from '@nestjs/common';
 import { publish } from 'utils/publish';
 
-export namespace Events {
-  @Controller('events/:channel')
-  export class api {
-    @Post('send')
-    async sendMessage(@Param() params, @Body() body) {
-      await publish(params.channel, {
-        message: body.message,
-      });
-    }
+@Controller('events/:channel')
+export class Events {
+  @Post('send')
+  async sendMessage(@Param() params, @Body() body, @Req() req) {
+    await publish(params.channel, {
+      text: body.text,
+      user: body.user,
+    });
+  }
 
-    @Get('subscribe')
-    subscribe(@Param() params, @Req() req) {
-      let padding = new Array(2048);
-      let body = ':' + padding.join(' ') + '\n';
-      req.res.set({
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Grip-Hold': 'stream',
-        'Grip-Channel': params.channel,
-        'Grip-Keep-Alive': ':\\n\\n; format=cstring; timeout=20',
-      });
-      return { body };
-    }
+  @Get('subscribe')
+  subscribe(@Param() params, @Req() req) {
+    let padding = new Array(2048);
+    let body = ':' + padding.join(' ') + '\n';
+    req.res.set({
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Grip-Hold': 'stream',
+      'Grip-Channel': params.channel,
+      'Grip-Keep-Alive': ':\\n\\n; format=cstring; timeout=20',
+    });
+    return { body };
   }
 }
 

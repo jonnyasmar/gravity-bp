@@ -8,18 +8,18 @@ export const layout: any = {
   flexible: {
     display: 'flex',
     '> *': {
-      flex: '1 0 auto',
+      flex: '1 1 auto',
     },
   },
   vertical: {
     flexDirection: 'column',
   },
-  stretch: (attributes: any = '1-0-auto') => {
+  stretch: (attributes: any = '1-1-auto') => {
     attributes = attributes.split('-');
     if (!attributes[1]) attributes[1] = '0';
     if (!attributes[2]) attributes[2] = 'auto';
     return {
-      flex: `${attributes[0]} ${attributes[1]} ${attributes[2]}`,
+      flex: `${attributes[0]} ${attributes[1]} ${attributes[2]} !important`,
     };
   },
 };

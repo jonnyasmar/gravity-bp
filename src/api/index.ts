@@ -6,16 +6,18 @@ import { NestFactory } from '@nestjs/core';
 const express = require('express')();
 
 import { Events } from 'api/Events';
+import { User } from 'api/User';
 export * from 'api/Events';
+export * from 'api/User';
 
 @Module({
   imports: [],
-  controllers: [Events.api],
+  controllers: [Events, User],
   components: [],
 })
 class AppModule implements NestModule {
   configure(consumer: MiddlewaresConsumer) {
-    consumer.apply(CorsMiddleware).forRoutes(Events.api);
+    consumer.apply(CorsMiddleware).forRoutes(Events, User);
   }
 }
 
