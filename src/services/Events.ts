@@ -16,10 +16,6 @@ export interface IEventSource {
 export class Events {
   static storage: IEventSources = {};
 
-  static unload: void = window.addEventListener('unload', () => {
-    Events.unsubscribeAll();
-  });
-
   static subscribe = (channel: string, options: IEventSource): ISubscribeResponse => {
     if (Events.storage[channel]) throw new Error(`Already subscribed to ${channel}...`);
 
@@ -51,11 +47,18 @@ export class Events {
     return channel;
   };
 
-  static unsubscribeAll = (): void => {
+  static unsubscribeAll = (): Array<string> => {
+    let channels;
+
     Object.keys(Events.storage).forEach(channel => {
       Events.storage[channel].close();
       delete Events.storage[channel];
       console.log(`Unsubscribed from ${channel}...`);
+      channels.push(channel);
     });
+
+    return channels;
   };
+
+  static unload: void = window.addEventListener('unload', Events.unsubscribeAll);
 }
