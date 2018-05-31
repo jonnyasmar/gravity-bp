@@ -1,4 +1,4 @@
-const tables = require('../db/tables');
+const tables = require('./tables/index');
 const TABLE = tables.TABLE;
 
 exports.up = function(knex, Promise) {

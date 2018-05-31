@@ -18,8 +18,8 @@ public
 .env.development
 .env.production
 
-# pgadmin Configs
-db/pgadmin/config/*
-!db/pgadmin/config/.gitkeep
-db/pgadmin/storage/*
-!db/pgadmin/storage/.gitkeep
+# pgadmin
+pgadmin/config/*
+!pgadmin/config/.gitkeep
+pgadmin/storage/*
+!pgadmin/storage/.gitkeep

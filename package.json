@@ -16,11 +16,11 @@
     "start-prod": "npm run build-api-prod && echo 'Starting...' & npm run start-api-prod & npm run build-public-prod",
     "deploy-api": "npm run build-api-prod && sls deploy",
     "deploy-function": "npm run build-api-prod && sls deploy function --function api",
-    "knex-migrate": "knex migrate:make --knexfile db/config.js",
-    "knex-rollback": "knex migrate:rollback --knexfile db/config.js",
-    "knex-update": "knex migrate:latest --knexfile db/config.js",
+    "knex-migrate": "knex migrate:make --knexfile src/db/config.js",
+    "knex-rollback": "knex migrate:rollback --knexfile src/db/config.js",
+    "knex-update": "knex migrate:latest --knexfile src/db/config.js",
     "precommit": "pretty-quick --staged",
-    "pgadmin": "docker run -p 5050:5050 -v $INIT_CWD/db/pgadmin:/pgadmin thajeztah/pgadmin4"
+    "pgadmin": "docker run -p 5050:5050 -v $INIT_CWD/pgadmin:/pgadmin thajeztah/pgadmin4"
   },
   "repository": {
     "type": "git",
@@ -88,6 +88,7 @@
   "devDependencies": {
     "@types/aws-lambda": "0.0.32",
     "@types/aws-serverless-express": "^3.0.1",
+    "@types/knex": "^0.14.14",
     "@types/node": "^9.6.6",
     "@types/node-uuid": "0.0.28",
     "@types/react": "^16.3.12",
