@@ -1,13 +1,40 @@
 const envs = {
   dev: 'development',
   prod: 'production',
+  test: 'test',
 };
 
 const env = process.env.NODE_ENV;
+
 const isDev = process.env.NODE_ENV === envs.dev;
 const isProd = process.env.NODE_ENV === envs.prod;
+const isTest = process.env.NODE_ENV === envs.test;
+
+const notDev = !isDev;
+const notProd = !isProd;
+const notTest = !isTest;
 
 const dotenv = require('dotenv').config({ path: `${__dirname}/.env.${env}` });
-const vars = dotenv.parsed;
 
-module.exports = { envs, env, isDev, isProd, vars };
+let vars = Object.keys(dotenv.parsed).reduce((acc, key) => {
+  acc[key] = dotenv.parsed[key] !== '' ? dotenv.parsed[key] : process.env[key];
+  return acc;
+}, {});
+
+let definedVars = Object.keys(vars).reduce((acc, key) => {
+  acc[`process.env.${key}`] = JSON.stringify(vars[key]);
+  return acc;
+}, {});
+
+module.exports = {
+  envs,
+  env,
+  isDev,
+  isProd,
+  isTest,
+  notDev,
+  notProd,
+  notTest,
+  vars,
+  definedVars,
+};

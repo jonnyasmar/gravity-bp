@@ -1,13 +1,9 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 const env = require('./env');
 
 const config = {
-  plugins: [
-    new Dotenv({
-      path: `./.env.${env.env}`,
-    }),
-  ],
+  plugins: [new webpack.DefinePlugin(env.definedVars)],
   resolve: {
     alias: {
       api: path.resolve(__dirname, 'src/api'),
