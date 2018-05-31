@@ -17,13 +17,11 @@ export namespace Chat {
   const rawMessages = (state: IReducers) => state.Chat.messages;
 
   const messages = createSelector([rawMessages], messages =>
-    messages.map((message: IMessage, i: number) => {
-      return (
-        <span key={i}>
-          <strong>{message.user || 'GBP'}:</strong>{' '}
-          <RealisticTyper message={message.text || ''} wpm={600} maxPause={125} />
-        </span>
-      );
-    })
+    messages.map((message: IMessage, i: number) => (
+      <span key={i}>
+        <strong>{message.user || 'GBP'}:</strong>{' '}
+        <RealisticTyper message={message.text || ''} wpm={600} maxPause={125} />
+      </span>
+    ))
   );
 }
