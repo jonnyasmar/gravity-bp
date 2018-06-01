@@ -8,7 +8,9 @@ const config = {
     alias: {
       api: path.resolve(__dirname, 'src/api'),
       actions: path.resolve(__dirname, 'src/actions'),
+      db: path.resolve(__dirname, 'src/db'),
       components: path.resolve(__dirname, 'src/components'),
+      env: path.resolve(__dirname, 'env'),
       reducers: path.resolve(__dirname, 'src/reducers'),
       root: path.resolve(__dirname),
       selectors: path.resolve(__dirname, 'src/selectors'),

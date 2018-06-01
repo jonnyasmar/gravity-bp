@@ -8,8 +8,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   timeout: 20
-  environment:
-    GRIP_URL: ${env:GRIP_URL}
+  environment: ${env:}
 
 custom:
   serverless-offline:

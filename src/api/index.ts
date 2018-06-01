@@ -7,17 +7,19 @@ const express = require('express')();
 
 import { Events } from 'api/Events';
 import { User } from 'api/User';
-export * from 'api/Events';
-export * from 'api/User';
+import { Chat } from 'api/Chat';
+export { Events, User, Chat };
+
+const controllers = [Events, User, Chat];
 
 @Module({
   imports: [],
-  controllers: [Events, User],
+  controllers,
   components: [],
 })
 class AppModule implements NestModule {
   configure(consumer: MiddlewaresConsumer) {
-    consumer.apply(CorsMiddleware).forRoutes(Events, User);
+    consumer.apply(CorsMiddleware).forRoutes(...controllers);
   }
 }
 

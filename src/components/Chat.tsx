@@ -16,17 +16,23 @@ class Main extends React.Component<selectors.Chat.Props> {
     e.preventDefault();
     if (this.button !== null && this.input !== null && this.input.value !== '') {
       let value = this.input.value;
-      this.input.value = '';
-      this.input.focus();
+      this.input.disabled = true;
       this.button.disabled = true;
-      await request('events/messages/send', {
-        method: 'POST',
-        data: {
-          text: this.input !== null && value,
-          user: window.sessionStorage.getItem('ip'),
-        },
-      });
+      try {
+        await request('chat/messages/send', {
+          method: 'POST',
+          data: {
+            text: this.input !== null && value,
+            user: window.sessionStorage.getItem('ip'),
+          },
+        });
+        this.input.value = '';
+      } catch (err) {
+        console.dir(err);
+      }
+      this.input.disabled = false;
       this.button.disabled = false;
+      this.input.focus();
     }
   };
 

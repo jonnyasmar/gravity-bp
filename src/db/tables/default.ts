@@ -3,8 +3,4 @@ const TIMESTAMPS = {
   updated_at: 'updated_at',
 };
 
-const DEFAULT = {
-  TIMESTAMPS,
-};
-
-module.exports = DEFAULT;
+export const DEFAULT = { TIMESTAMPS };

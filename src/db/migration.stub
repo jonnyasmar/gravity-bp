@@ -1,14 +1,13 @@
-const tables = require('./tables/index');
-const TABLE = tables.TABLE;
+import { CHAT } from 'db/tables';
 
-exports.up = function(knex, Promise) {
-  return Promise.all([
-    //knex.schema
-  ]);
+exports.up = (knex, Promise) => {
+    return Promise.all([
+
+    ]);
 };
 
-exports.down = function(knex, Promise) {
-  return Promise.all([
-    //knex.schema
-  ]);
+exports.down = (knex, Promise) => {
+    return Promise.all([
+
+    ]);
 };

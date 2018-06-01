@@ -14,9 +14,9 @@ public
 /api
 
 # Env
-.env.local
-.env.development
-.env.production
+env/.env.local
+env/.env.development
+env/.env.production
 
 # pgadmin
 pgadmin/config/*
