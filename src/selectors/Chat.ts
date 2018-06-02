@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { IReducers, IProps, ISelectors } from 'reducers';
-import { IMessage } from 'models/Chat';
+import { IMessage } from 'models/Message';
 
 export namespace Chat {
   type Selectors = {

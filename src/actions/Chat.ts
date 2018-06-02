@@ -1,5 +1,5 @@
 import { actions, Dispatch, states, Store, types } from 'reducers';
-import { IMessage, IMessageCreate, IMessageBody, IMessageUpdate } from 'models/Chat';
+import { IMessage, IMessageCreate, IMessageBody, IMessageUpdate } from 'models/Message';
 import { request } from 'utils/request';
 
 export interface IActions {

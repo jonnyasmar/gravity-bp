@@ -1,7 +1,7 @@
 import { Patch, Get, Post, Delete, Controller, Param, Body } from '@nestjs/common';
 import { publish } from 'utils/publish';
 import { getCurrentUTC } from 'utils/time';
-import { IMessage, IMessageBody, IMessageCreateAPI, IMessageUpdateAPI, IMessageDelete } from 'models/Chat';
+import { IMessage, IMessageBody, IMessageCreateAPI, IMessageUpdateAPI, IMessageDelete } from 'models/Message';
 import { DAOs } from 'daos';
 
 const DAO = DAOs.Chat;

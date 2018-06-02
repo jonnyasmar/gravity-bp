@@ -1,5 +1,5 @@
 import { db } from 'utils/db';
-import { IMessage } from 'models/Chat';
+import { IMessage } from 'models/Message';
 import { CHAT } from 'db/tables';
 
 interface IWhere {

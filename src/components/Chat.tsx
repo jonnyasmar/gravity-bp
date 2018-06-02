@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connected } from 'reducers';
 import * as selectors from 'selectors';
 import { g } from 'styles';
-import { IMessage } from 'models/Chat';
+import { IMessage } from 'models/Message';
+import { RIEInput } from 'riek';
 
 class Main extends React.Component<selectors.Chat.Props> {
   button: HTMLButtonElement | null = null;
@@ -28,26 +29,26 @@ class Main extends React.Component<selectors.Chat.Props> {
     const { message } = props;
 
     return (
-      <span>
-        <strong>{message.user}:</strong> {message.text}{' '}
+      <span className="with-tools">
+        <strong>{message.user}: </strong>
+        <RIEInput
+          value={message.text}
+          change={prop =>
+            this.props.Actions.Chat.updateMessage(
+              {
+                id: message.id,
+                text: prop.message,
+                user: message.user,
+              },
+              true
+            )
+          }
+          propName="message"
+        />
         <i
           className="fa fa-trash-alt clickable"
           onClick={() => {
             message.id && this.props.Actions.Chat.deleteMessage(message.id, true);
-          }}
-        />{' '}
-        <i
-          className="fa fa-pencil-alt clickable"
-          onClick={() => {
-            message.id &&
-              this.props.Actions.Chat.updateMessage(
-                {
-                  id: message.id,
-                  text: 'THIS IS A TEST!',
-                  user: message.user,
-                },
-                true
-              );
           }}
         />
       </span>

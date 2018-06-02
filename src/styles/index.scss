@@ -25,3 +25,28 @@ button {
 textarea {
   @extend %form-reset-textarea;
 }
+
+.with-tools {
+  input {
+    margin: 0;
+    padding: 0;
+
+    line-height: 1;
+  }
+  i {
+    display: none;
+    margin-left: 0.5em;
+    font-size: 0.75em;
+    opacity: 0.5;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    i {
+      display: inline;
+    }
+  }
+}
