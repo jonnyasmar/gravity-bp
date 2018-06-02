@@ -130,7 +130,7 @@ const config = {
         },
         {
           test: /\.tsx?$/,
-          loader: 'awesome-typescript-loader',
+          loader: 'awesome-typescript-loader?useBabel=true&useCache=true',
         },
         {
           test: /\.twig$/,

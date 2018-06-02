@@ -18,7 +18,8 @@ env/.env.local
 env/.env.development
 env/.env.production
 
-# pgadmin
+# Caches & Storage
+.awcache
 pgadmin/config/*
 !pgadmin/config/.gitkeep
 pgadmin/storage/*
