@@ -7,7 +7,9 @@ const common = require('./webpack.config.common');
 const env = require('./env');
 
 const config = {
-  [env.envs.dev]: {},
+  [env.envs.dev]: {
+    watch: true,
+  },
   [env.envs.prod]: {},
   all: {
     cache: true,
