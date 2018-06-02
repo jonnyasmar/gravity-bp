@@ -7,16 +7,7 @@ const common = require('./webpack.config.common');
 const env = require('./env');
 
 const config = {
-  [env.envs.dev]: {
-    watch: true,
-    devServer: {
-      hot: true,
-      host: '0.0.0.0',
-      port: '8080',
-      contentBase: './public',
-      historyApiFallback: true,
-    },
-  },
+  [env.envs.dev]: {},
   [env.envs.prod]: {},
   all: {
     cache: true,

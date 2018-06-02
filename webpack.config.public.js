@@ -10,29 +10,35 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const history = require('connect-history-api-fallback');
+const convert = require('koa-connect');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 const env = require('./env');
 
 const config = {
   [env.envs.dev]: {
-    devServer: {
+    serve: {
       hot: true,
       host: '0.0.0.0',
       port: '8080',
-      contentBase: './public',
-      historyApiFallback: true,
+      content: './public',
+      add: (app, middleware, options) => {
+        app.use(convert(history({})));
+      },
     },
     plugins: [new webpack.HotModuleReplacementPlugin({})],
   },
   [env.envs.prod]: {
-    devServer: {
+    serve: {
       hot: true,
       compress: true,
       host: '0.0.0.0',
       port: '8080',
-      contentBase: './public',
-      historyApiFallback: true,
+      content: './public',
+      add: (app, middleware, options) => {
+        app.use(convert(history({})));
+      },
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin({}),
