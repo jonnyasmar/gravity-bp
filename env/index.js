@@ -4,7 +4,7 @@ const envs = {
   test: 'test',
 };
 
-const index = process.env.NODE_ENV;
+const env = process.env.NODE_ENV;
 
 const isDev = process.env.NODE_ENV === envs.dev;
 const isProd = process.env.NODE_ENV === envs.prod;
@@ -16,7 +16,7 @@ const notTest = !isTest;
 
 let vars;
 try {
-  const dotenv = require('dotenv').config({ path: `${__dirname}/.env.${index}` });
+  const dotenv = require('dotenv').config({ path: `${__dirname}/.env.${env}` });
   vars = Object.keys(dotenv.parsed).reduce((acc, key) => {
     acc[key] = dotenv.parsed[key] !== '' ? dotenv.parsed[key] : process.env[key];
     return acc;
@@ -35,7 +35,7 @@ let definedVars = Object.keys(vars).reduce(
 
 module.exports = {
   envs,
-  env: index,
+  env,
   isDev,
   isProd,
   isTest,

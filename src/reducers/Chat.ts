@@ -1,43 +1,54 @@
-import { getCurrentUTC } from 'utils/time';
+import { IDispatch } from 'reducers';
 
-export interface IMessage {
-  text: string;
-  user: string;
-  created_at: string;
-  updated_at: string;
+interface IState<T> {
+  readonly items: Array<T & { id?: number }>;
 }
 
-interface IState {
-  readonly messages: Array<IMessage>;
-}
-
-interface IAction {
-  readonly type: string;
-  readonly message?: IMessage;
+interface IAction<T> extends IDispatch {
+  readonly item?: T & { id?: number };
+  readonly items?: Array<T & { id?: number }>;
+  readonly id?: number;
 }
 
 const types = {
-  NEW_MESSAGE: 'NEW_MESSAGE',
+  CREATE: 'CREATE',
+  READ: 'READ',
+  READ_ALL: 'READ_ALL',
+  UPDATE: 'UPDATE',
+  DELETE: 'DELETE',
 };
 
-const initialState: IState = {
-  messages: [
-    {
-      text: 'Welcome to Gravity Boilerplate!',
-      user: 'GBP',
-      created_at: getCurrentUTC(),
-      updated_at: getCurrentUTC(),
-    },
-  ],
+const initialState = {
+  items: [],
 };
 
-const reducer = (state: IState = initialState, action: IAction): IState => {
+const reducer = <T>(state: IState<T> = initialState, action: IAction<T>): IState<T> => {
   const actions = {
-    [types.NEW_MESSAGE]: (): IState => {
+    [types.CREATE]: (): IState<T> => {
       return {
         ...state,
-        messages: [...state.messages, action.message || initialState.messages[0]],
+        items: [...state.items, action.item || initialState.items[0]],
       };
+    },
+    [types.READ]: (): IState<T> => {
+      return {
+        ...state,
+        items: action.items || initialState.items,
+      };
+    },
+    [types.UPDATE]: (): IState<T> => {
+      return {
+        ...state,
+        items: state.items.map(item => {
+          if (action.item && item.id === action.item.id) item = action.item;
+          return item;
+        }),
+      };
+    },
+    [types.DELETE]: (): IState<T> => {
+      let newState = { ...state };
+      newState.items = state.items.filter(item => item.id !== action.id);
+      return newState;
     },
   };
 

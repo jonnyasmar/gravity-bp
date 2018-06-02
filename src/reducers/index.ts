@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux';
+import { IActions } from 'actions';
+import { name } from 'utils/redux';
 
 import * as __MODULE__ from 'reducers/__MODULE__';
 import * as Chat from 'reducers/Chat';
 import * as Events from 'reducers/Events';
-import { IActions } from 'actions';
-import { name } from 'utils/redux';
+import { IMessage, IMessageActions } from 'models/Chat';
 
 export { Store } from 'redux';
 export { connected } from 'utils/redux';
 
-export interface INamed {
+export interface IDispatch {
   name?: string;
+  type: string;
 }
 export interface IStore<T = {}> {
   readonly history?: any;
@@ -18,7 +20,7 @@ export interface IStore<T = {}> {
   readonly Store: IReducers;
 }
 
-export type Dispatch<T> = (action: T & INamed) => any;
+export type Dispatch<T> = (action: T & IDispatch) => any;
 export type ISelectors = (
   state: IReducers
 ) => {
@@ -28,19 +30,19 @@ export type IProps<T = {}> = IActions & IStore<T>;
 
 export namespace states {
   export type __MODULE__ = __MODULE__.IState;
-  export type Chat = Chat.IState;
+  export type Chat = Chat.IState<IMessageActions>;
   export type Events = Events.IState;
 }
 
 export namespace actions {
   export type __MODULE__ = __MODULE__.IAction;
-  export type Chat = Chat.IAction;
+  export type Chat = Chat.IAction<IMessageActions>;
   export type Events = Events.IAction;
 }
 
 export interface IReducers {
   readonly __MODULE__: __MODULE__.IState;
-  readonly Chat: Chat.IState;
+  readonly Chat: Chat.IState<IMessage>;
   readonly Events: Events.IState;
 }
 
@@ -70,6 +72,6 @@ export const types = {
 
 export const combinedReducers = combineReducers({
   __MODULE__: name(__MODULE__.reducer),
-  Chat: name(Chat.reducer),
+  Chat: name(Chat.reducer, 'Chat'),
   Events: name(Events.reducer),
 });

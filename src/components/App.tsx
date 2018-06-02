@@ -1,9 +1,26 @@
 import * as React from 'react';
 import { connected, IProps } from 'reducers';
 import { components } from 'components';
+import { process } from 'utils/publish';
 import { g } from 'styles';
 
-class Main extends React.Component<IProps, any> {
+interface IWindow {
+  width: number;
+  height: number;
+}
+
+interface IState {
+  window: IWindow;
+}
+
+class Main extends React.Component<IProps, IState> {
+  state = {
+    window: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    },
+  };
+
   constructor(props: IProps) {
     super(props);
 
@@ -11,18 +28,11 @@ class Main extends React.Component<IProps, any> {
 
     Actions.Events.subscribe('messages', {
       onmessage: async e => {
-        let data = JSON.parse(e.data);
-        console.log(`Received ${data.text} on messages...`);
-        await Actions.Chat.newMessage(data);
+        let event = JSON.parse(e.data);
+        console.log(`Received on messages...`, event.data);
+        await process(Actions, event.actions)(event.data);
       },
     });
-
-    this.state = {
-      window: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
-    };
 
     window.addEventListener('resize', () => {
       this.setState({

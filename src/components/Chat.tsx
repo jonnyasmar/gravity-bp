@@ -1,49 +1,70 @@
 import * as React from 'react';
 import { connected } from 'reducers';
-import { request } from 'utils/request';
 import * as selectors from 'selectors';
 import { g } from 'styles';
+import { IMessage } from 'models/Chat';
 
 class Main extends React.Component<selectors.Chat.Props> {
   button: HTMLButtonElement | null = null;
   input: HTMLInputElement | null = null;
 
-  componentDidMount() {
+  async componentDidMount() {
     if (this.input !== null) this.input.focus();
+    await this.props.Actions.Chat.readMessages();
   }
 
-  submit = async (e: Event) => {
+  submit = async (e: Event): Promise<void> => {
     e.preventDefault();
-    if (this.button !== null && this.input !== null && this.input.value !== '') {
-      let value = this.input.value;
-      this.input.disabled = true;
-      this.button.disabled = true;
-      try {
-        await request('chat/messages/send', {
-          method: 'POST',
-          data: {
-            text: this.input !== null && value,
-            user: window.sessionStorage.getItem('ip'),
-          },
-        });
-        this.input.value = '';
-      } catch (err) {
-        console.dir(err);
-      }
-      this.input.disabled = false;
-      this.button.disabled = false;
+    let user = window.sessionStorage.getItem('ip');
+    if (user !== null && this.button !== null && this.input !== null && this.input.value !== '') {
+      let text = this.input.value;
+      this.input.value = '';
+      await this.props.Actions.Chat.createMessage({ text, user }, true);
       this.input.focus();
     }
   };
 
+  Message: React.SFC<{ message: IMessage }> = props => {
+    const { message } = props;
+
+    return (
+      <span>
+        <strong>{message.user}:</strong> {message.text}{' '}
+        <i
+          className="fa fa-trash-alt clickable"
+          onClick={() => {
+            message.id && this.props.Actions.Chat.deleteMessage(message.id, true);
+          }}
+        />{' '}
+        <i
+          className="fa fa-pencil-alt clickable"
+          onClick={() => {
+            message.id &&
+              this.props.Actions.Chat.updateMessage(
+                {
+                  id: message.id,
+                  text: 'THIS IS A TEST!',
+                  user: message.user,
+                },
+                true
+              );
+          }}
+        />
+      </span>
+    );
+  };
+
   render() {
+    const { Message } = this;
     const { getMessages } = this.props.Selectors;
     const { Section, Chat, Form, Div } = g;
 
     return (
       <>
         <Section>
-          <Chat layout="stretch:1-1-100%">{getMessages}</Chat>
+          <Chat layout="stretch:1-1-100%">
+            {getMessages.map((message: IMessage, i: number) => <Message message={message} key={i} />)}
+          </Chat>
         </Section>
 
         <Form onSubmit={this.submit}>
