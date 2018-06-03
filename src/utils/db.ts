@@ -5,13 +5,12 @@ import * as config from 'db/config';
 const environment = process.env.NODE_ENV || env.envs.development;
 
 export class db {
-  static knex: knex;
-  static open = (): knex => (db.knex = knex(config[environment]));
-  static close = () => db.knex.destroy();
+  static open = (): knex => knex(config[environment]);
+  static close = (connection: knex) => connection.destroy();
   static query = async fn => {
-    db.open();
-    let response = await fn(db.knex);
-    db.close();
+    let connection = db.open();
+    let response = await fn(connection);
+    db.close(connection);
     return response;
   };
 }
