@@ -16,9 +16,9 @@
     "start-prod": "npm run build-api-prod && echo 'Starting...' & npm run start-api-prod & npm run build-public-prod",
     "deploy-api": "npm run build-api-prod && sls deploy",
     "deploy-function": "npm run build-api-prod && sls deploy function --function api",
-    "knex-migrate": "knex migrate:make --knexfile src/db/config.ts",
-    "knex-rollback": "knex migrate:rollback --knexfile src/db/config.ts",
-    "knex-update": "knex migrate:latest --knexfile src/db/config.ts",
+    "knex-migrate": "knex migrate:make --knexfile src/utils/rds.ts",
+    "knex-rollback": "knex migrate:rollback --knexfile src/utils/rds.ts",
+    "knex-update": "knex migrate:latest --knexfile src/utils/rds.ts",
     "precommit": "pretty-quick --staged",
     "pgadmin": "docker run -p 5050:5050 -v $INIT_CWD/pgadmin:/pgadmin thajeztah/pgadmin4"
   },

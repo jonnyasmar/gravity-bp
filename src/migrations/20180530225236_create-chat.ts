@@ -1,4 +1,4 @@
-import { CHAT } from 'db/tables';
+import { CHAT } from '../tables';
 
 exports.up = (knex, Promise) => {
   return Promise.all([

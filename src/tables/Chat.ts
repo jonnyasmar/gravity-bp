@@ -1,4 +1,4 @@
-import { DEFAULT } from 'db/tables/Default';
+import { DEFAULT } from './Default';
 
 export const CHAT = {
   name: 'chat',

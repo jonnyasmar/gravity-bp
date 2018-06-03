@@ -1,4 +1,4 @@
-import { ____ } from 'db/tables';
+import { ____ } from '../tables';
 
 exports.up = (knex, Promise) => {
     return Promise.all([
