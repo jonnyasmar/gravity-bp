@@ -1,4 +1,4 @@
-import { IActions, Dispatch, IStates, Store, types } from 'reducers';
+import { IActions, Dispatch, IStates, Store, types, names } from 'reducers';
 import { IMessage, IMessageCreate, IMessageBody, IMessageUpdate } from 'models/Message';
 import { request } from 'utils/request';
 
@@ -8,8 +8,6 @@ export interface IActions {
   readonly updateMessage: (message: IMessageUpdate, publish?: boolean) => Promise<void>;
   readonly deleteMessage: (id: number, publish?: boolean) => Promise<void>;
 }
-
-const name = 'Chat';
 
 export const action = (dispatch: Dispatch<IActions.Chat>, store: Store<IStates.Chat>): IActions => ({
   createMessage: async (message: IMessageCreate, publish?: boolean): Promise<void> => {
@@ -22,7 +20,7 @@ export const action = (dispatch: Dispatch<IActions.Chat>, store: Store<IStates.C
       else
         dispatch({
           type: types.Chat.CREATE,
-          name,
+          name: names.Chat,
           item: message,
         });
     } catch (err) {
@@ -37,7 +35,7 @@ export const action = (dispatch: Dispatch<IActions.Chat>, store: Store<IStates.C
 
       dispatch({
         type: types.Chat.READ,
-        name,
+        name: names.Chat,
         items: messages,
       });
     } catch (err) {
@@ -54,7 +52,7 @@ export const action = (dispatch: Dispatch<IActions.Chat>, store: Store<IStates.C
       } else {
         dispatch({
           type: types.Chat.UPDATE,
-          name,
+          name: names.Chat,
           item: message as IMessage,
         });
       }
@@ -72,7 +70,7 @@ export const action = (dispatch: Dispatch<IActions.Chat>, store: Store<IStates.C
       else
         dispatch({
           type: types.Chat.DELETE,
-          name,
+          name: names.Chat,
           id,
         });
     } catch (err) {

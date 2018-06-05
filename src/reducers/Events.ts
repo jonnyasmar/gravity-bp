@@ -1,4 +1,4 @@
-import * as Data from './_Data';
+const name = 'Events';
 
 interface IState {
   readonly subscriptions?: Array<string>;
@@ -59,4 +59,4 @@ const reducer = (state: IState = initialState, action: IAction): IState => {
 };
 
 // Required Exports
-export { IState, IReducer, IAction, types, initialState, reducer };
+export { name, IState, IReducer, IAction, types, initialState, reducer };

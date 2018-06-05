@@ -1,3 +1,5 @@
+const name = '__MODULE__';
+
 export interface IData {
   value?: string;
 }
@@ -35,4 +37,4 @@ const reducer = (state: IState = initialState, action: IAction): IState => {
 };
 
 // Required Exports
-export { IState, IReducer, IAction, types, initialState, reducer };
+export { name, IState, IReducer, IAction, types, initialState, reducer };

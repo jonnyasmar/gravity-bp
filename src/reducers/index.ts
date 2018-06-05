@@ -27,6 +27,12 @@ export type ISelectors = (
 };
 export type IProps<T = {}> = IActions & IStore<T>;
 
+export const names = {
+  __MODULE__: __MODULE__.name,
+  Chat: Chat.name,
+  Events: Events.name,
+};
+
 export namespace IStates {
   export type __MODULE__ = __MODULE__.IState;
   export type Chat = Chat.IState;
@@ -70,7 +76,7 @@ export const types = {
 };
 
 export const combinedReducers = combineReducers({
-  __MODULE__: named(__MODULE__.reducer),
-  Chat: named(Chat.reducer, 'Chat'),
-  Events: named(Events.reducer),
+  __MODULE__: named(__MODULE__.reducer, names.__MODULE__),
+  Chat: named(Chat.reducer, names.Chat),
+  Events: named(Events.reducer, names.Events),
 });

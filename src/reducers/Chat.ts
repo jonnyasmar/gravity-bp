@@ -28,4 +28,4 @@ const reducer = combineReducers({
 });
 
 // Required Exports
-export { IState, IReducer, IAction, types, initialState, reducer };
+export { name, IState, IReducer, IAction, types, initialState, reducer };

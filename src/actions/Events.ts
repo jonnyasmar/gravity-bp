@@ -1,4 +1,4 @@
-import { types } from 'reducers';
+import { types, names } from 'reducers';
 import { Store, Dispatch, IStates, IActions } from 'reducers';
 import { Events, IEventSource } from 'services/Events';
 
@@ -14,6 +14,7 @@ export const action = (dispatch: Dispatch<IActions.Events>, store: Store<IStates
       Events.subscribe(channel, options);
       return dispatch({
         type: types.Events.SUBSCRIBE,
+        name: names.Events,
         channel,
       });
     } catch (err) {
@@ -25,6 +26,7 @@ export const action = (dispatch: Dispatch<IActions.Events>, store: Store<IStates
       Events.unsubscribe(channel);
       return dispatch({
         type: types.Events.UNSUBSCRIBE,
+        name: names.Events,
         channel,
       });
     } catch (err) {
@@ -34,7 +36,10 @@ export const action = (dispatch: Dispatch<IActions.Events>, store: Store<IStates
   unsubscribeAll: (): IActions.Events => {
     try {
       Events.unsubscribeAll();
-      return dispatch({ type: types.Events.UNSUBSCRIBE_ALL });
+      return dispatch({
+        type: types.Events.UNSUBSCRIBE_ALL,
+        name: names.Events,
+      });
     } catch (err) {
       throw err;
     }
