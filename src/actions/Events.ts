@@ -1,15 +1,15 @@
 import { types } from 'reducers';
-import { Store, Dispatch, states, actions } from 'reducers';
+import { Store, Dispatch, IStates, IActions } from 'reducers';
 import { Events, IEventSource } from 'services/Events';
 
 export interface IActions {
-  readonly subscribe: (channel: string, options: IEventSource) => actions.Events;
-  readonly unsubscribe: (channel: string) => actions.Events;
-  readonly unsubscribeAll: () => actions.Events;
+  readonly subscribe: (channel: string, options: IEventSource) => IActions.Events;
+  readonly unsubscribe: (channel: string) => IActions.Events;
+  readonly unsubscribeAll: () => IActions.Events;
 }
 
-export const action = (dispatch: Dispatch<actions.Events>, store: Store<states.Events>): IActions => ({
-  subscribe: (channel: string, options: IEventSource): actions.Events => {
+export const action = (dispatch: Dispatch<IActions.Events>, store: Store<IStates.Events>): IActions => ({
+  subscribe: (channel: string, options: IEventSource): IActions.Events => {
     try {
       Events.subscribe(channel, options);
       return dispatch({
@@ -20,7 +20,7 @@ export const action = (dispatch: Dispatch<actions.Events>, store: Store<states.E
       throw err;
     }
   },
-  unsubscribe: (channel: string): actions.Events => {
+  unsubscribe: (channel: string): IActions.Events => {
     try {
       Events.unsubscribe(channel);
       return dispatch({
@@ -31,7 +31,7 @@ export const action = (dispatch: Dispatch<actions.Events>, store: Store<states.E
       throw err;
     }
   },
-  unsubscribeAll: (): actions.Events => {
+  unsubscribeAll: (): IActions.Events => {
     try {
       Events.unsubscribeAll();
       return dispatch({ type: types.Events.UNSUBSCRIBE_ALL });

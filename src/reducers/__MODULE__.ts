@@ -2,6 +2,8 @@ export interface IData {
   value?: string;
 }
 
+interface IReducer extends IState {}
+
 interface IState {
   readonly data: Array<IData>;
 }
@@ -33,4 +35,4 @@ const reducer = (state: IState = initialState, action: IAction): IState => {
 };
 
 // Required Exports
-export { IState, IAction, types, initialState, reducer };
+export { IState, IReducer, IAction, types, initialState, reducer };

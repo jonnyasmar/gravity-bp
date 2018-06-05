@@ -1,18 +1,18 @@
-import { actions, Dispatch, states, Store, types } from 'reducers';
+import { IActions, Dispatch, IStates, Store, types } from 'reducers';
 import { IMessage, IMessageCreate, IMessageBody, IMessageUpdate } from 'models/Message';
 import { request } from 'utils/request';
 
 export interface IActions {
-  readonly createMessage: (message: IMessageBody, publish?: boolean) => Promise<any>;
-  readonly readMessages: (id?: number) => Promise<any>;
-  readonly updateMessage: (message: IMessageUpdate, publish?: boolean) => Promise<any>;
-  readonly deleteMessage: (id: number, publish?: boolean) => Promise<any>;
+  readonly createMessage: (message: IMessageBody, publish?: boolean) => Promise<void>;
+  readonly readMessages: (id?: number) => Promise<void>;
+  readonly updateMessage: (message: IMessageUpdate, publish?: boolean) => Promise<void>;
+  readonly deleteMessage: (id: number, publish?: boolean) => Promise<void>;
 }
 
 const name = 'Chat';
 
-export const action = (dispatch: Dispatch<actions.Chat>, store: Store<states.Chat>): IActions => ({
-  createMessage: async (message: IMessageCreate, publish?: boolean): Promise<any> => {
+export const action = (dispatch: Dispatch<IActions.Chat>, store: Store<IStates.Chat>): IActions => ({
+  createMessage: async (message: IMessageCreate, publish?: boolean): Promise<void> => {
     try {
       if (publish)
         await request('chat/messages/create', {
@@ -29,7 +29,7 @@ export const action = (dispatch: Dispatch<actions.Chat>, store: Store<states.Cha
       console.error(err);
     }
   },
-  readMessages: async (id?: number): Promise<any> => {
+  readMessages: async (id?: number): Promise<void> => {
     try {
       let messages = await request(`chat/messages/read${id ? `/${id}` : ''}`, {
         method: 'GET',
@@ -44,7 +44,7 @@ export const action = (dispatch: Dispatch<actions.Chat>, store: Store<states.Cha
       console.error(err);
     }
   },
-  updateMessage: async (message: IMessageUpdate, publish?: boolean): Promise<any> => {
+  updateMessage: async (message: IMessageUpdate, publish?: boolean): Promise<void> => {
     try {
       if (publish) {
         await request(`chat/messages/update`, {
@@ -62,7 +62,7 @@ export const action = (dispatch: Dispatch<actions.Chat>, store: Store<states.Cha
       console.error(err);
     }
   },
-  deleteMessage: async (id: number, publish?: boolean): Promise<any> => {
+  deleteMessage: async (id: number, publish?: boolean): Promise<void> => {
     try {
       if (publish)
         await request('chat/messages/delete', {

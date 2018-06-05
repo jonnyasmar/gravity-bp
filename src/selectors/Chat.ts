@@ -8,7 +8,7 @@ export namespace Chat {
   };
   export type Props = IProps<Selectors>;
 
-  const rawMessages = (state: IReducers) => state.Chat.items;
+  const rawMessages = (state: IReducers) => state.Chat.data.items;
 
   const messages = createSelector([rawMessages], messages => {
     return messages.map((message: IMessage) => message as IMessage);

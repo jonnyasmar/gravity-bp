@@ -18,12 +18,25 @@ export const connected: any = (component: React.Component, options?: IConnect) =
   let route = options && options.routed !== false ? withRouter : withoutRouter;
   let state = options && options.selectors ? props(options.selectors) : options && options.store ? props() : null;
 
-  return route(connect(state, actions)(component));
+  return route(
+    connect(
+      state,
+      actions
+    )(component)
+  );
 };
 
-export const name = (reducer: any, namespace: string | undefined = undefined) => {
+export const named = (reducer: any, namespace: string | undefined = undefined) => {
   return (state, action) => {
     if (action.name !== namespace && state !== undefined) return state;
     return reducer(state, action);
   };
+};
+
+export const namespace = (namespace: string, types: any) => {
+  Object.keys(types).forEach((type: string) => {
+    types[type] = `${namespace}/${type}`;
+  });
+
+  return types;
 };

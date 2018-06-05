@@ -1,6 +1,10 @@
+import * as Data from './_Data';
+
 interface IState {
   readonly subscriptions?: Array<string>;
 }
+
+interface IReducer extends IState {}
 
 interface IAction {
   readonly type: string;
@@ -55,4 +59,4 @@ const reducer = (state: IState = initialState, action: IAction): IState => {
 };
 
 // Required Exports
-export { IState, IAction, types, initialState, reducer };
+export { IState, IReducer, IAction, types, initialState, reducer };
