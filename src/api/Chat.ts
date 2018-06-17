@@ -1,5 +1,5 @@
 import { Patch, Get, Post, Delete, Controller, Param, Body } from '@nestjs/common';
-import { publish } from 'utils/publish';
+import { publish, pubActions } from 'utils/publish';
 import { getCurrentUTC } from 'utils/time';
 import { IMessage, IMessageBody, IMessageCreateAPI, IMessageUpdateAPI, IMessageDelete } from 'models/Message';
 import { DAOs } from 'daos';
@@ -20,7 +20,7 @@ export class Chat {
     try {
       let response = await DAO.create(message);
       await publish(params.channel, {
-        actions: ['Chat', 'createMessage'],
+        action: pubActions.Chat.createMessage,
         data: response[0],
       });
       return response;
@@ -58,7 +58,7 @@ export class Chat {
     try {
       let response = await DAO.update(message);
       await publish(params.channel, {
-        actions: ['Chat', 'updateMessage'],
+        action: pubActions.Chat.updateMessage,
         data: response[0],
       });
       return response;
@@ -72,7 +72,7 @@ export class Chat {
     try {
       let response = await DAO.delete(body.id);
       await publish(params.channel, {
-        actions: ['Chat', 'deleteMessage'],
+        action: pubActions.Chat.deleteMessage,
         data: body.id,
       });
       return response;

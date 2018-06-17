@@ -3,7 +3,9 @@
 class WindowHack {
   constructor(serverless, options) {
     if (typeof window === 'undefined') {
-      global.window = {};
+      global.window = {
+        addEventListener: (...args) => {},
+      };
     }
   }
 }

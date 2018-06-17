@@ -5,12 +5,14 @@ import * as __MODULE__ from 'actions/__MODULE__';
 import * as Chat from 'actions/Chat';
 import * as Events from 'actions/Events';
 
+export interface IAllActions {
+  readonly __MODULE__: __MODULE__.IActions;
+  readonly Chat: Chat.IActions;
+  readonly Events: Events.IActions;
+}
+
 export interface IActions {
-  readonly Actions: {
-    readonly __MODULE__: __MODULE__.IActions;
-    readonly Chat: Chat.IActions;
-    readonly Events: Events.IActions;
-  };
+  readonly Actions: IAllActions;
 }
 
 export const actions = (dispatch: Dispatch<any>): IActions => ({

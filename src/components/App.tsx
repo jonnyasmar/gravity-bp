@@ -30,7 +30,7 @@ class Main extends React.Component<IProps, IState> {
       onmessage: async e => {
         let event = JSON.parse(e.data);
         console.log(`Received on messages...`, event.data);
-        await process(Actions, event.actions)(event.data);
+        await process(Actions, event.action)(event.data);
       },
     });
 
