@@ -6,6 +6,10 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 const env = require('./env');
 
+console.dir(env);
+
+const bundle = env.bundles.api;
+
 const config = {
   [env.envs.dev]: {
     watch: true,
@@ -22,6 +26,7 @@ const config = {
       publicPath: '',
       library: '[name]',
       libraryTarget: 'umd',
+      globalObject: 'this',
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
@@ -31,6 +36,9 @@ const config = {
         //watch: true,
       }),
       new webpack.EnvironmentPlugin(['NODE_ENV']),
+      new webpack.ProvidePlugin({
+        window: 'src/utils/window.js',
+      }),
     ],
     module: {
       rules: [
@@ -44,4 +52,4 @@ const config = {
   },
 };
 
-module.exports = merge(common, config.all, config[env.env]);
+module.exports = merge(common(bundle), config.all, config[env.env]);

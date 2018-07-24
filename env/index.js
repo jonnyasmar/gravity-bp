@@ -1,3 +1,8 @@
+const bundles = {
+  api: 'api',
+  public: 'public',
+};
+
 const envs = {
   dev: 'development',
   prod: 'production',
@@ -14,26 +19,34 @@ const notDev = !isDev;
 const notProd = !isProd;
 const notTest = !isTest;
 
-let vars;
-try {
-  const dotenv = require('dotenv').config({ path: `${__dirname}/.env.${env}` });
-  vars = Object.keys(dotenv.parsed).reduce((acc, key) => {
-    acc[key] = dotenv.parsed[key] !== '' ? dotenv.parsed[key] : process.env[key];
-    return acc;
-  }, {});
-} catch (err) {
-  vars = process.env;
-}
+let definedVars = bundle => {
+  let vars;
+  try {
+    const dotenv = require('dotenv').config({ path: `${__dirname}/.env.${env}` });
+    vars = Object.keys(dotenv.parsed).reduce((acc, key) => {
+      if (bundle === bundles.api || !key.startsWith('_')) {
+        acc[key.replace(/^_/, '')] = dotenv.parsed[key] !== '' ? dotenv.parsed[key] : process.env[key];
+      }
+      return acc;
+    }, {});
+  } catch (err) {
+    vars = process.env;
+  }
 
-let definedVars = Object.keys(vars).reduce(
-  (acc, key) => {
-    acc['process.env'][key] = JSON.stringify(vars[key]);
-    return acc;
-  },
-  { 'process.env': {} }
-);
+  return Object.keys(vars).reduce(
+    (acc, key) => {
+      if (bundle === bundles.api || !key.startsWith('_')) {
+        key = key.replace(/^!/, '');
+        acc['process.env'][key] = JSON.stringify(vars[key]);
+      }
+      return acc;
+    },
+    { 'process.env': {} }
+  );
+};
 
 module.exports = {
+  bundles,
   envs,
   env,
   isDev,
@@ -42,6 +55,5 @@ module.exports = {
   notDev,
   notProd,
   notTest,
-  vars,
   definedVars,
 };

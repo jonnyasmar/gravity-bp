@@ -11,7 +11,11 @@ export namespace Chat {
   const rawMessages = (state: IReducers) => state.Chat.data.items;
 
   const messages = createSelector([rawMessages], messages => {
-    return messages.map((message: IMessage) => message as IMessage);
+    try {
+      return messages.map((message: IMessage) => message as IMessage);
+    } catch (e) {
+      return [];
+    }
   });
 
   export const selectors: ISelectors = (state: IReducers): Selectors => ({

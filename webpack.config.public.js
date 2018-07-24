@@ -16,6 +16,9 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 const env = require('./env');
 
+const bundle = env.bundles.public;
+const vars = env.definedVars(bundle)['process.env'];
+
 const config = {
   [env.envs.dev]: {
     serve: {
@@ -119,7 +122,7 @@ const config = {
         template: 'src/views/index.twig',
         inject: 'body',
         title: 'Gravity Boilerplate by Jonny Asmar',
-        api: env.vars.API,
+        api: JSON.parse(vars.API),
       }),
     ],
     module: {
@@ -143,4 +146,4 @@ const config = {
 
 //console.log(util.inspect(merge(common, config.all, config[env.env]), {depth: null}));
 
-module.exports = merge(common, config.all, config[env.env]);
+module.exports = merge(common(bundle), config.all, config[env.env]);

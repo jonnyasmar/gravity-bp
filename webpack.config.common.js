@@ -2,9 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const env = require('./env');
 
-const config = {
+const config = bundle => ({
   mode: 'none',
-  plugins: [new webpack.DefinePlugin(env.definedVars)],
+  plugins: [new webpack.DefinePlugin(env.definedVars(bundle))],
   resolve: {
     alias: {
       api: path.resolve(__dirname, 'src/api'),
@@ -27,6 +27,6 @@ const config = {
   watchOptions: {
     ignored: [/^api/, /^public/, /^node_modules/],
   },
-};
+});
 
 module.exports = config;

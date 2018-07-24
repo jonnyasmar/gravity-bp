@@ -25,6 +25,7 @@ export class Chat {
       });
       return response;
     } catch (err) {
+      console.log(err);
       return err;
     }
   }
@@ -34,6 +35,7 @@ export class Chat {
     try {
       return await DAO.read();
     } catch (err) {
+      console.log(err);
       return err;
     }
   }
@@ -43,6 +45,7 @@ export class Chat {
     try {
       return await DAO.read(params.id);
     } catch (err) {
+      console.log(err);
       return err;
     }
   }
@@ -63,6 +66,7 @@ export class Chat {
       });
       return response;
     } catch (err) {
+      console.log(err);
       return err;
     }
   }
@@ -77,6 +81,7 @@ export class Chat {
       });
       return response;
     } catch (err) {
+      console.log(err);
       return err;
     }
   }
