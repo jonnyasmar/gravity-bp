@@ -47,8 +47,8 @@ export class Events {
     return channel;
   };
 
-  static unsubscribeAll = (): Array<string> => {
-    let channels;
+  static unsubscribeAll = (): string[] => {
+    let channels: string[] = [];
 
     Object.keys(Events.storage).forEach(channel => {
       Events.storage[channel].close();

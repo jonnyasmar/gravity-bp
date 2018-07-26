@@ -21,6 +21,7 @@
     "deploy-api": "npm run build-api-prod && cross-env NODE_ENV=production sls deploy",
     "deploy-function": "npm run build-api-prod && cross-env NODE_ENV=production sls deploy function --function api",
     "deploy": "npm run build-app-prod && npm run deploy-api && sls syncToS3 && sls invalidateCloudFrontCache",
+    "deploy-app": "npm run build-app-prod && sls syncToS3 && sls invalidateCloudFrontCache",
     "knex-migrate": "knex migrate:make --knexfile src/utils/rds.ts",
     "knex-rollback": "knex migrate:rollback --knexfile src/utils/rds.ts",
     "knex-update": "knex migrate:latest --knexfile src/utils/rds.ts",

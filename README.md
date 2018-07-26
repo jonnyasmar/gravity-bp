@@ -21,13 +21,13 @@ A slightly-opinionated TypeScript powered React/Redux boilerplate designed to ex
 - [x] Basic Glamorous Setup
 - [x] Fanout SSE Integration
 - [x] Basic RDS CRUD boilerplate
+- [x] AWS CloudFront deployment
 
 #### Please star this repo if you find it useful!
 
 ### Short-term Goals
 
 - [ ] Basic DynamoDB CRUD boilerplate
-- [ ] AWS CloudFront deployment
 - [ ] Mocha/Chai/Enzyme test suite
 - [ ] JSDoc generation
 - [ ] Dockerization

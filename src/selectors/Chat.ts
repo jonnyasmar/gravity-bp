@@ -4,7 +4,7 @@ import { IMessage } from 'models/Message';
 
 export namespace Chat {
   type Selectors = {
-    getMessages: Array<IMessage>;
+    getMessages: IMessage[];
   };
   export type Props = IProps<Selectors>;
 

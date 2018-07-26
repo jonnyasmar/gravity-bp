@@ -1,7 +1,7 @@
 const name = 'Events';
 
 interface IState {
-  readonly subscriptions?: Array<string>;
+  readonly subscriptions?: string[];
 }
 
 interface IReducer extends IState {}
@@ -21,13 +21,13 @@ const initialState: IState = {
   subscriptions: [],
 };
 
-const addSubscription = (subscriptions: Array<string> | undefined, channel: string | undefined) => {
+const addSubscription = (subscriptions: string[] | undefined, channel: string | undefined) => {
   return [...(subscriptions || [])].concat(channel || []).filter((subscription, i, self) => {
     return self.indexOf(subscription) === i;
   });
 };
 
-const removeSubscription = (subscriptions: Array<string> | undefined, channel: string | undefined) => {
+const removeSubscription = (subscriptions: string[] | undefined, channel: string | undefined) => {
   return [...(subscriptions || [])].filter(subscription => {
     return subscription !== channel;
   });

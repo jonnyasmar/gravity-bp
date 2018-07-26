@@ -7,7 +7,7 @@ export interface IActions {
 }
 
 export const action = (dispatch: Dispatch<IActions.__MODULE__>, store: Store<IStates.__MODULE__>): IActions => ({
-  action: (data: Array<IData>): IActions.__MODULE__ => {
+  action: (data: IData[]): IActions.__MODULE__ => {
     return dispatch({
       type: types.__MODULE__.ACTION,
       name: names.__MODULE__,

@@ -7,12 +7,12 @@ export interface IData {
 interface IReducer extends IState {}
 
 interface IState {
-  readonly data: Array<IData>;
+  readonly data: IData[];
 }
 
 interface IAction {
   readonly type: string;
-  readonly data?: Array<IData>;
+  readonly data?: IData[];
 }
 
 const types = {

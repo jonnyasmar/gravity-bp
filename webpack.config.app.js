@@ -78,20 +78,14 @@ const config = {
         cacheId: 'gravity-bp',
         dontCacheBustUrlsMatching: /\.\w{20}\./,
         filename: 'sw.js',
-        minify: true,
-        navigateFallback: '/',
+        minify: false,
+        navigateFallback: '/index.html',
         stripPrefix: 'app/',
         swFilePath: 'app/sw.js',
         staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json/],
         dynamicUrlToDependencies: {
           '/': [...glob.sync(`[name].js`)],
         },
-        runtimeCaching: [
-          {
-            urlPattern: /.*/,
-            handler: 'networkFirst',
-          },
-        ],
       }),
     ],
   },
