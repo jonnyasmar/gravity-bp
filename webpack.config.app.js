@@ -16,7 +16,7 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 const env = require('./env');
 
-const bundle = env.bundles.public;
+const bundle = env.bundles.app;
 const vars = env.definedVars(bundle)['process.env'];
 
 const config = {
@@ -25,7 +25,7 @@ const config = {
       hot: true,
       host: '0.0.0.0',
       port: '8080',
-      content: './public',
+      content: './app',
       add: (app, middleware, options) => {
         app.use(convert(history({})));
       },
@@ -38,7 +38,7 @@ const config = {
       compress: true,
       host: '0.0.0.0',
       port: '8080',
-      content: './public',
+      content: './app',
       add: (app, middleware, options) => {
         app.use(convert(history({})));
       },
@@ -80,8 +80,8 @@ const config = {
         filename: 'sw.js',
         minify: true,
         navigateFallback: '/',
-        stripPrefix: 'public/',
-        swFilePath: 'public/sw.js',
+        stripPrefix: 'app/',
+        swFilePath: 'app/sw.js',
         staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json/],
         dynamicUrlToDependencies: {
           '/': [...glob.sync(`[name].js`)],
@@ -102,7 +102,7 @@ const config = {
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname, 'public'),
+      path: path.resolve(__dirname, 'app'),
       publicPath: '',
     },
     devtool: 'source-map',
@@ -110,7 +110,7 @@ const config = {
       extensions: ['.tsx', '.ts', '.js', '.scss', '.css', '.twig'],
     },
     plugins: [
-      new CleanWebpackPlugin(['public'], {
+      new CleanWebpackPlugin(['app'], {
         watch: true,
       }),
       new webpack.EnvironmentPlugin(['NODE_ENV']),

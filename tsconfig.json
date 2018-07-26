@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./public/",
+    "outDir": "./app/",
     "sourceMap": true,
     "noImplicitAny": false,
     "strict": true,

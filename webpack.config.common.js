@@ -25,7 +25,7 @@ const config = bundle => ({
     },
   },
   watchOptions: {
-    ignored: [/^api/, /^public/, /^node_modules/],
+    ignored: [/^api/, /^app/, /^node_modules/],
   },
 });
 

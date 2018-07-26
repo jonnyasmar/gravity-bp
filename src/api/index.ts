@@ -1,4 +1,4 @@
-import { MiddlewaresConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { CorsMiddleware } from '@nest-middlewares/cors';
 import { Context, Handler } from 'aws-lambda';
 import * as serverless from 'aws-serverless-express';
@@ -34,6 +34,15 @@ const createServer = () => {
 };
 
 export const handler: Handler = (event: any, context: Context) => {
+  // Hack to fix empty Content-Length header on DELETE requests
+  // Fix has been committed to aws-serverless-express; awaiting merge
+  // see https://github.com/awslabs/aws-serverless-express/issues/106
+  if (event.httpMethod === 'DELETE' && event.body && (!event.headers || !event.headers['Conent-Length'])) {
+    console.log('Adding content length for DELETE body');
+    event.headers = event.headers || {};
+    event.headers['Content-Length'] = Buffer.byteLength(event.body);
+  }
+
   if (served) {
     console.log('Loading existing NestJS server...');
     return serverless.proxy(served, event, context);

@@ -11,7 +11,7 @@ let app = express(),
   views = path.resolve('./src/views');
 
 app.use(compression());
-app.use(express.static('public'));
+app.use(express.static('app'));
 
 // Routes
 app.get('*', (req: any, res: any, next: any) => {

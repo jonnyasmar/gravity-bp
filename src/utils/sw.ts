@@ -4,8 +4,7 @@ export const register = (): void => {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     const sw: ServiceWorkerContainer = navigator.serviceWorker;
 
-    sw
-      .register(swUrl)
+    sw.register(swUrl)
       .then(registration => {
         registration.onupdatefound = (): any => {
           const installer: ServiceWorker | null = registration.installing;

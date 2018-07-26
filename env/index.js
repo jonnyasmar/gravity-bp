@@ -1,6 +1,6 @@
 const bundles = {
   api: 'api',
-  public: 'public',
+  app: 'app',
 };
 
 const envs = {

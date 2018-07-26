@@ -17,6 +17,6 @@ render(
   document.getElementsByTagName('div')[0]
 );
 
-register();
+//register();
 
 if (module.hot) module.hot.accept();

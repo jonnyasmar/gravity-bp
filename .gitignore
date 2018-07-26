@@ -10,8 +10,8 @@ node_modules
 jspm_packages
 
 # Dist
-public
-/api
+app
+api
 
 # Env
 env/.env.local
