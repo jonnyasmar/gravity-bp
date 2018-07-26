@@ -6,8 +6,6 @@ const merge = require('webpack-merge');
 const common = require('./webpack.config.common');
 const env = require('./env');
 
-console.dir(env);
-
 const bundle = env.bundles.api;
 
 const config = {

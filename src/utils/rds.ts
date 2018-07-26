@@ -29,7 +29,6 @@ export class rds {
   static close = (connection: knex) => connection.destroy();
   static query = async fn => {
     try {
-      console.dir(config);
       let connection: knex = rds.open();
       let response = await fn(connection);
       rds.close(connection);
