@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
@@ -119,22 +120,16 @@ const config = {
         title: 'Gravity Boilerplate by Jonny Asmar',
         api: JSON.parse(vars.API),
       }),
+      new FaviconsWebpackPlugin({
+        logo: 'src/assets/favicon.png',
+        prefix: '/',
+      }),
       new WebpackPwaManifest({
         name: 'Gravity BP',
         short_name: 'Gravity BP',
         description: 'Gravity Boilerplate: A TypeScript powered React/Redux boilerplate by Jonny Asmar.',
         theme_color: '#ffffff',
         background_color: '#ffffff',
-        icons: [
-          {
-            src: path.resolve('src/assets/favicon.png'),
-            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-          },
-          {
-            src: path.resolve('src/assets/favicon.png'),
-            size: '1024x1024', // you can also use the specifications pattern
-          },
-        ],
       }),
     ],
     module: {
