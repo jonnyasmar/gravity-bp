@@ -33,7 +33,7 @@ const reducer = <T>(state: IState<T> = initialState, action: IAction<T>): IState
     [types.READ]: (): IState<T> => {
       return {
         ...state,
-        items: action.items || initialState.items,
+        items: [...state.items, ...(action.items || initialState.items)],
       };
     },
     [types.UPDATE]: (): IState<T> => {

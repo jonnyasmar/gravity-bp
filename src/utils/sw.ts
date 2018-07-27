@@ -1,6 +1,15 @@
+import { actions } from 'actions';
+
 const swUrl: string = 'sw.js';
 
-export const register = (): void => {
+export const register = (store): void => {
+  const { Actions } = actions(store.dispatch);
+
+  Actions.Chat.createMessage({
+    text: 'Welcome to Gravity Boilerplate!',
+    user: 'Jonny Asmar',
+  });
+
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     const sw: ServiceWorkerContainer = navigator.serviceWorker;
 

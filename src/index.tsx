@@ -15,6 +15,6 @@ render(
   document.getElementsByTagName('div')[0]
 );
 
-register();
+register(store);
 
 if (module.hot) module.hot.accept();
