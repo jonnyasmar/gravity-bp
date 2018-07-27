@@ -51,7 +51,7 @@ class Main extends React.Component<IProps, IState> {
     return (
       <Main layout="flexible vertical" window={this.state.window}>
         <Header layout="flexible stretch:0-0-auto">
-          <Div text="align">~ Gravity Boilerplate ~</Div>
+          <Div text="align">Gravity Boilerplate</Div>
         </Header>
 
         <Section layout="flexible vertical">

@@ -8,8 +8,6 @@ import 'styles/index.scss';
 
 const { Provider } = require('react-redux');
 
-document.write('<div></div>');
-
 render(
   <Provider store={store}>
     <App compiler="TypeScript" framework="React" />

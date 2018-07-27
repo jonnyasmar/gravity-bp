@@ -70,6 +70,7 @@ resources:
       Type: AWS::CloudFront::Distribution
       Properties:
         DistributionConfig:
+          HttpVersion: 'http2'
           Origins:
             - DomainName: ${self:custom.s3Bucket}.s3.amazonaws.com
               ## An identifier for the origin which must be unique within the distribution
